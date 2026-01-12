@@ -11,7 +11,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import type { RootStackParamList } from './src/types/NavigationType';
 
 // Util
-import MainTab from './src/screens/MainTabs';
+import MainTab from './src/utils/MainTabs';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

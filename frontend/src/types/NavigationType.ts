@@ -6,4 +6,5 @@ export type RootStackParamList = {
 // Main tab
 export type MainTabParamList = {
   Home: undefined;
+  BackendPingTest: undefined;
 };
