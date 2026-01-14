@@ -2,17 +2,11 @@
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LocaleConfig } from 'react-native-calendars';
 
-// Screen
-import HomeScreen from './src/screens/HomeScreen';
-
-// type
-import type { RootStackParamList } from './src/types/navigation';
-
 // Util
-import MainTab from './src/utils/MainTabs';
+import Colors from './src/utils/color';
+import StackNavigator from './src/utils/stackNavigator';
 
 // Calendars locale Setting
 LocaleConfig.locales['ko'] = {
@@ -57,19 +51,15 @@ LocaleConfig.locales['ko'] = {
   today: '오늘',
 };
 
-LocaleConfig.defaultLocale = 'ko';
-
-// Navigation
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <SafeAreaProvider>
-      <StatusBar backgroundColor={'transparent'} barStyle={'dark-content'} />
+      <StatusBar
+        backgroundColor={Colors.background}
+        barStyle={'dark-content'}
+      />
       <NavigationContainer>
-        <MainTab />
+        <StackNavigator />
       </NavigationContainer>
     </SafeAreaProvider>
   );

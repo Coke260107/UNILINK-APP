@@ -3,9 +3,10 @@ import React, { JSX } from 'react';
 import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
-// 카테고리 타입 (중복 방지용으로 export 권장)
+// Util
 import type { Category } from '../types/category';
 
+// HomeScreen 전용
 type IconProps = {
   size?: number;
   color?: string;

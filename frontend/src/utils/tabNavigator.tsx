@@ -1,9 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+// Icon
 import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Screen
 import HomeScreen from '../screens/HomeScreen';
+import ChattingListScreen from '../screens/chattingListScreen';
 import BackendPingTestScreen from '../screens/BackendPingTestScreen';
 
 // Type
@@ -11,25 +15,32 @@ import type { MainTabParamList } from '../types/navigation';
 import { StyleSheet, Text } from 'react-native';
 import Colors from './color';
 
-const Tab = createBottomTabNavigator<MainTabParamList>();
+// Component
+import {
+  ChattingListHeader,
+  HomeScreenHeader,
+  ServerPingTestHeader,
+} from '../components/main_tab/headers';
 
+const Tab = createBottomTabNavigator<MainTabParamList>();
 function MainTab() {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        // Tab Setting
-        tabBarActiveTintColor: Colors.main,
-
-        // Header 스타일
-        // 그림자 제거
+        // Header Style
         headerShadowVisible: false, // IOS
         headerStyle: {
-          backgroundColor: 'rgb(250, 250, 250)', // Neutral-50
-          elevation: 0, // ANDROID
+          backgroundColor: Colors.background,
+          elevation: 0,
         },
+
+        // TabBar Style
+        tabBarActiveTintColor: Colors.main, // Active Color
         tabBarStyle: {
-          backgroundColor: 'rgb(250, 250, 250)', // Neutral-50
+          backgroundColor: Colors.background, // Background Color
         },
       }}
     >
@@ -37,50 +48,53 @@ function MainTab() {
         name="BackendPingTest"
         component={BackendPingTestScreen}
         options={{
-          // 아이콘 설정
+          headerTitle: ServerPingTestHeader,
+
+          tabBarLabel: '통신 테스트',
           tabBarIcon: ({ color }) => (
             <FontAwesome5
               name="broadcast-tower"
               iconStyle="solid"
-              size={20}
+              size={16}
               color={color}
             />
           ),
-
-          // Header Setting
-          headerTitle: () => <Text style={styles.title}>PING TEST</Text>,
         }}
       />
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          // 상단 바
-          headerRightContainerStyle: {
-            alignItems: 'center',
+          headerTitle: HomeScreenHeader,
 
-            paddingRight: 12,
-          },
-
-          headerTitle: () => <Text style={styles.title}>UNILINK</Text>,
-
-          // headerRight: () => (
-          //   <Pressable style={styles.login_button}>
-          //     <Text style={styles.login_button_text}>로그인</Text>
-          //   </Pressable>
-          // ),
-
-          // 하단 아이콘 설정
           tabBarIcon: ({ color }) => (
             <FontAwesome6
               name="house"
               iconStyle="solid"
-              size={20}
+              size={16}
               color={color}
             />
           ),
+        }}
+      />
 
-          tabBarLabel: '홈',
+      <Tab.Screen
+        name="ChattingList"
+        component={ChattingListScreen}
+        options={{
+          // Header Style
+          headerTitle: () => <ChattingListHeader />,
+
+          // TabBar Style
+          tabBarLabel: '채팅',
+          tabBarIcon: ({ color }) => (
+            <FontAwesome6
+              name="comments"
+              iconStyle="solid"
+              size={16}
+              color={color}
+            />
+          ),
         }}
       />
     </Tab.Navigator>

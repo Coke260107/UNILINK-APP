@@ -1,5 +1,5 @@
 const Colors = {
-  background: 'rgba(255, 255, 255, 1)', // white
+  background: 'rgb(250, 250, 250)', // Neutral-50
   border: 'rgb(229, 229, 229)', // Neutral-300
   guide: 'rgb(161, 161, 161)', // Neutral-400
   main: 'rgb(255, 100, 103)', // Red-400
