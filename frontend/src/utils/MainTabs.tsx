@@ -7,20 +7,29 @@ import HomeScreen from '../screens/HomeScreen';
 import BackendPingTestScreen from '../screens/BackendPingTestScreen';
 
 // Type
-import type { MainTabParamList } from '../types/NavigationType';
+import type { MainTabParamList } from '../types/navigation';
 import { StyleSheet, Text } from 'react-native';
+import Colors from './color';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 function MainTab() {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={{
+        // Tab Setting
+        tabBarActiveTintColor: Colors.main,
+
         // Header 스타일
         // 그림자 제거
         headerShadowVisible: false, // IOS
         headerStyle: {
+          backgroundColor: 'rgb(250, 250, 250)', // Neutral-50
           elevation: 0, // ANDROID
+        },
+        tabBarStyle: {
+          backgroundColor: 'rgb(250, 250, 250)', // Neutral-50
         },
       }}
     >
@@ -46,6 +55,21 @@ function MainTab() {
         name="Home"
         component={HomeScreen}
         options={{
+          // 상단 바
+          headerRightContainerStyle: {
+            alignItems: 'center',
+
+            paddingRight: 12,
+          },
+
+          headerTitle: () => <Text style={styles.title}>UNILINK</Text>,
+
+          // headerRight: () => (
+          //   <Pressable style={styles.login_button}>
+          //     <Text style={styles.login_button_text}>로그인</Text>
+          //   </Pressable>
+          // ),
+
           // 하단 아이콘 설정
           tabBarIcon: ({ color }) => (
             <FontAwesome6
@@ -56,8 +80,7 @@ function MainTab() {
             />
           ),
 
-          // 상단 바
-          headerTitle: () => <Text style={styles.title}>UNILINK</Text>,
+          tabBarLabel: '홈',
         }}
       />
     </Tab.Navigator>
@@ -68,7 +91,23 @@ export default MainTab;
 
 const styles = StyleSheet.create({
   title: {
+    color: Colors.main,
     fontSize: 24,
     fontWeight: 'bold',
+  },
+
+  login_button: {
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+
+    backgroundColor: 'white',
+
+    borderWidth: 1,
+    borderColor: 'rgb(229, 229, 229)', // Neutral-300
+    borderRadius: 999,
+  },
+
+  login_button_text: {
+    fontWeight: '600',
   },
 });
