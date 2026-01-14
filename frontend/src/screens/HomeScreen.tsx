@@ -16,6 +16,7 @@ import { Calendar } from 'react-native-calendars';
 import { HomeCalendar } from '../components/calendar';
 
 // Style
+import globalStyle from '../styles/globalStyle';
 import { styles } from '../styles/HomeScreenStyle';
 import Colors from '../utils/color';
 
@@ -49,13 +50,13 @@ export default function HomeScreen() {
   return (
     <>
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollView_containerStyle}
+        style={globalStyle.scroll_container}
+        contentContainerStyle={globalStyle.scroll_content_container}
         showsVerticalScrollIndicator={false}
       >
         {/* Search Bar */}
         <View style={styles.search_bar}>
-          <TextInput style={styles.search_TextInput} placeholder="모임 검색" />
+          <TextInput style={{ flex: 1 }} placeholder="모임 검색" />
           <FontAwesome6
             name="magnifying-glass"
             iconStyle="solid"
@@ -65,47 +66,46 @@ export default function HomeScreen() {
         </View>
 
         {/* Categories */}
-        <View style={styles.category_view}>
+        <View style={styles.category_container}>
           {CATEGORY_VALUE.map(item => (
             <CategoryCard key={item} item={item} />
           ))}
         </View>
 
         {/* Meeting Preview */}
-        <View style={styles.card_view}>
-          <View style={styles.header_view}>
-            <Text style={styles.title}>인기 모임</Text>
+        <View style={[globalStyle.base_card]}>
+          <View style={styles.header_container}>
+            <Text style={globalStyle.base_card_title}>인기 모임</Text>
             <Pressable>
-              <Text style={styles.meetingPreview_guide}>
+              <Text style={globalStyle.base_guide}>
                 전체모임{' '}
                 <FontAwesome6
                   name="angle-right"
                   iconStyle="solid"
-                  style={styles.meetingPreview_guide}
+                  style={globalStyle.base_guide}
                 />
               </Text>
             </Pressable>
           </View>
 
-          <View style={styles.meetingPreview_main}>
-            <FlatList
-              data={meetings}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={item => item.id.toString()}
-              contentContainerStyle={{ gap: 12, paddingHorizontal: 4 }}
-              renderItem={({ item }) => <MeetingPreviewCard meeting={item} />}
-            />
-          </View>
+          <FlatList
+            data={meetings}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id.toString()}
+            contentContainerStyle={{ gap: 12, paddingHorizontal: 4 }}
+            renderItem={({ item }) => <MeetingPreviewCard meeting={item} />}
+          />
         </View>
 
-        <View style={styles.card_view}>
-          <View style={[styles.header_view, { marginBottom: 4 }]}>
-            <Text style={styles.title}>나의 일정</Text>
+        {/* Calendar */}
+        <View style={globalStyle.base_card}>
+          <View style={[styles.header_container, { marginBottom: 4 }]}>
+            <Text style={globalStyle.base_card_title}>나의 일정</Text>
             <FontAwesome6
               name="angle-right"
               iconStyle="solid"
-              style={styles.meetingPreview_guide}
+              style={globalStyle.base_guide}
             />
           </View>
           <HomeCalendar />
@@ -119,8 +119,8 @@ export default function HomeScreen() {
 function CategoryCard({ item }: { item: Category }) {
   return (
     <>
-      <View
-        style={[styles.category_card, { backgroundColor: Colors[item].sub }]}
+      <Pressable
+        style={[styles.category_button, { backgroundColor: Colors[item].sub }]}
       >
         <View style={{ alignItems: 'flex-start' }}>
           {CategoryIcons[item]()}
@@ -128,7 +128,7 @@ function CategoryCard({ item }: { item: Category }) {
         <View style={{ alignItems: 'flex-end' }}>
           <Text>{CATEGORY_LABEL[item]}</Text>
         </View>
-      </View>
+      </Pressable>
     </>
   );
 }
@@ -160,9 +160,7 @@ function MeetingPreviewCard({ meeting }: { meeting: Meeting }) {
           </View>
 
           <Pressable style={styles.meetingPreview_card_joinButton}>
-            <Text style={styles.meetingPreview_card_joinButton_text}>
-              참여하기
-            </Text>
+            <Text>상세보기</Text>
           </Pressable>
         </View>
       </Pressable>
