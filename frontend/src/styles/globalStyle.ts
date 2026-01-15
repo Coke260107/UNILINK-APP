@@ -6,13 +6,13 @@ import { StyleSheet } from 'react-native';
 import Colors from '../utils/color';
 
 const globalStyle = StyleSheet.create({
-  scroll_container: {
+  base_scroll_container: {
     flex: 1,
 
     backgroundColor: Colors.background,
   },
 
-  scroll_content_container: {
+  base_scroll_content_container: {
     paddingHorizontal: 12,
     paddingBottom: 12,
 

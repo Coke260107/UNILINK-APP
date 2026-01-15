@@ -50,8 +50,8 @@ export default function HomeScreen() {
   return (
     <>
       <ScrollView
-        style={globalStyle.scroll_container}
-        contentContainerStyle={globalStyle.scroll_content_container}
+        style={globalStyle.base_scroll_container}
+        contentContainerStyle={globalStyle.base_scroll_content_container}
         showsVerticalScrollIndicator={false}
       >
         {/* Search Bar */}
@@ -123,7 +123,7 @@ function CategoryCard({ item }: { item: Category }) {
         style={[styles.category_button, { backgroundColor: Colors[item].sub }]}
       >
         <View style={{ alignItems: 'flex-start' }}>
-          {CategoryIcons[item]()}
+          <CategoryIcons category={item} />
         </View>
         <View style={{ alignItems: 'flex-end' }}>
           <Text>{CATEGORY_LABEL[item]}</Text>
@@ -143,7 +143,7 @@ function MeetingPreviewCard({ meeting }: { meeting: Meeting }) {
         ]}
       >
         <View style={styles.meetingPreview_card_header}>
-          {CategoryIcons[meeting.category]({ size: 12 })}
+          <CategoryIcons category={meeting.category} size={12} />
           <Text style={styles.meetingPreview_card_title}>{meeting.title}</Text>
         </View>
 

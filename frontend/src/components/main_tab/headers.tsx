@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 
 // Style
 import styles from './headerStyle';
+import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
-export function ServerPingTestHeader() {
+export function ServerPingTestTitle() {
   return (
     <>
       <View>
@@ -13,7 +14,7 @@ export function ServerPingTestHeader() {
   );
 }
 
-export function HomeScreenHeader() {
+export function HomeScreenTitle() {
   return (
     <>
       <View>
@@ -23,11 +24,28 @@ export function HomeScreenHeader() {
   );
 }
 
-export function ChattingListHeader() {
+export function ChattingListTitle() {
   return (
     <>
       <View>
         <Text style={styles.base_title}>채팅</Text>
+      </View>
+    </>
+  );
+}
+
+export function ChattingListRightHeader() {
+  return (
+    <>
+      <View style={styles.chatingList_container}>
+        <Pressable>
+          <FontAwesome6
+            name="magnifying-glass"
+            iconStyle="solid"
+            size={18}
+            color={'black'}
+          />
+        </Pressable>
       </View>
     </>
   );

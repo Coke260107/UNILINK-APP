@@ -6,9 +6,9 @@ import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Screen
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/homeScreen';
 import ChattingListScreen from '../screens/chattingListScreen';
-import BackendPingTestScreen from '../screens/BackendPingTestScreen';
+import BackendPingTestScreen from '../screens/backendPingTestScreen';
 
 // Type
 import type { MainTabParamList } from '../types/navigation';
@@ -17,9 +17,10 @@ import Colors from './color';
 
 // Component
 import {
-  ChattingListHeader,
-  HomeScreenHeader,
-  ServerPingTestHeader,
+  ServerPingTestTitle,
+  HomeScreenTitle,
+  ChattingListTitle,
+  ChattingListRightHeader,
 } from '../components/main_tab/headers';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -48,7 +49,7 @@ function MainTab() {
         name="BackendPingTest"
         component={BackendPingTestScreen}
         options={{
-          headerTitle: ServerPingTestHeader,
+          headerTitle: () => <ServerPingTestTitle />,
 
           tabBarLabel: '통신 테스트',
           tabBarIcon: ({ color }) => (
@@ -65,8 +66,9 @@ function MainTab() {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: HomeScreenHeader,
+          headerTitle: () => <HomeScreenTitle />,
 
+          tabBarLabel: '홈',
           tabBarIcon: ({ color }) => (
             <FontAwesome6
               name="house"
@@ -83,7 +85,8 @@ function MainTab() {
         component={ChattingListScreen}
         options={{
           // Header Style
-          headerTitle: () => <ChattingListHeader />,
+          headerTitle: () => <ChattingListTitle />,
+          headerRight: () => <ChattingListRightHeader />,
 
           // TabBar Style
           tabBarLabel: '채팅',

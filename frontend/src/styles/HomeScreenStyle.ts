@@ -92,10 +92,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 4,
 
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
 
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: 'black',
     borderRadius: 999,
   },
 });
