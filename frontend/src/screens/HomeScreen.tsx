@@ -17,7 +17,7 @@ import { HomeCalendar } from '../components/calendar';
 
 // Style
 import globalStyle from '../styles/globalStyle';
-import { styles } from '../styles/HomeScreenStyle';
+import { styles } from '../styles/homeScreenStyle';
 import Colors from '../utils/color';
 
 // Test Data

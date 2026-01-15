@@ -1,6 +1,6 @@
 import { View, Text, Pressable } from 'react-native';
 import { useState } from 'react';
-import styles from '../styles/BackendPingTestScreenStyle';
+import styles from '../styles/backendPingTestScreenStyle';
 
 function BackendPingTestScreen() {
   const [status, setStatus] = useState<'idle' | 'checking'>('idle');
