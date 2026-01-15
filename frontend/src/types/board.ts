@@ -12,3 +12,12 @@ export type board = {
   comment: string;
   createdAt: string;
 };
+
+export type boardPopular = {
+  id: number;
+  category: Category;
+  title: string;
+  content: string;
+  like: number;
+  commentCount: number;
+}

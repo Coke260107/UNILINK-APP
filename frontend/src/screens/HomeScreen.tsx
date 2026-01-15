@@ -21,6 +21,7 @@ import Colors from '../utils/color';
 
 // Test Data
 import meeting_dummy from '../data/dummy_data.json';
+import board_dummy from '../data/dummy_data2.json';
 
 // Icon
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
@@ -32,6 +33,8 @@ import {
   CATEGORY_LABEL,
   type Category,
 } from '../types/category';
+import { boardPopular } from '../types/board';
+
 import type { Meeting } from '../types/meeting';
 
 export default function HomeScreen() {
@@ -39,6 +42,9 @@ export default function HomeScreen() {
     meeting_dummy as Meeting[],
   );
 
+  const [boards, setBoards] = useState<boardPopular[]>(
+    board_dummy as boardPopular[],
+  );
   const insets = useSafeAreaInsets();
 
   const onPress = () => {
@@ -76,7 +82,7 @@ export default function HomeScreen() {
             <Text style={globalStyle.base_card_title}>인기 모임</Text>
             <Pressable>
               <Text style={globalStyle.base_guide}>
-                전체모임{' '}
+                더보기{' '}
                 <FontAwesome6
                   name="angle-right"
                   iconStyle="solid"
@@ -94,6 +100,54 @@ export default function HomeScreen() {
             contentContainerStyle={{ gap: 12, paddingHorizontal: 4 }}
             renderItem={({ item }) => <MeetingPreviewCard meeting={item} />}
           />
+        </View>
+
+        {/* Board Preview */}
+        <View style={[globalStyle.base_card]}>
+          <View style={styles.header_container}>
+            <Text style={globalStyle.base_card_title}>인기 게시물</Text>
+            <Pressable>
+              <Text style={globalStyle.base_guide}>
+                더보기{' '}
+                <FontAwesome6
+                  name="angle-right"
+                  iconStyle="solid"
+                  style={globalStyle.base_guide}
+                />
+              </Text>
+            </Pressable>
+          </View>
+
+          <View>
+            {boards.map(item => (
+              <View key={item.id} style={styles.boardPreview_card}>
+                <Text style={styles.boardPreview_card_title}>{item.title}</Text>
+                <Text style={styles.boardBottom_font}>{item.content}</Text>
+                <View style={styles.boardBottom_container}>
+                  <View style={styles.boardBottom_items}>
+                    <FontAwesome6
+                      style={{ marginTop: 2 }}
+                      name="heart"
+                      iconStyle="solid"
+                      color={Colors.main}
+                    />
+                    <Text style={styles.boardBottom_font}>{item.like}</Text>
+                  </View>
+                  <View style={styles.boardBottom_items}>
+                    <FontAwesome6
+                      style={{ marginTop: 2 }}
+                      name="comments"
+                      iconStyle="solid"
+                      color={Colors.guide}
+                    />
+                    <Text style={styles.boardBottom_font}>
+                      {item.commentCount}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </View>
         </View>
 
         {/* Calendar */}
