@@ -59,25 +59,27 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
   },
 
-  meetingPreview_card_header: {
+  meetingPreview_header: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
 
-  meetingPreview_card_title: {
+  meetingPreview_title: {
     fontSize: 16,
     fontWeight: '600',
   },
 
-  meetingPreview_card_footer: {
-    flexDirection: 'row',
-
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  meetingPreview_host: {
+    fontSize: 12,
+    marginBottom: 50,
   },
 
-  meetingPreview_card_memberView: {
+  meetingPreview_footer: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  meetingPreview_metaItem: {
     flexDirection: 'row',
 
     alignItems: 'center',

@@ -10,7 +10,6 @@ import {
   ScrollView,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Calendar } from 'react-native-calendars';
 
 // Component
 import { HomeCalendar } from '../components/calendar';
@@ -33,7 +32,6 @@ import {
   CATEGORY_LABEL,
   type Category,
 } from '../types/category';
-
 import type { Meeting } from '../types/meeting';
 
 export default function HomeScreen() {
@@ -142,26 +140,30 @@ function MeetingPreviewCard({ meeting }: { meeting: Meeting }) {
           { backgroundColor: Colors[meeting.category].sub },
         ]}
       >
-        <View style={styles.meetingPreview_card_header}>
+        <View style={styles.meetingPreview_header}>
           <CategoryIcons category={meeting.category} size={12} />
-          <Text style={styles.meetingPreview_card_title}>{meeting.title}</Text>
+          <Text style={styles.meetingPreview_title}>{meeting.title}</Text>
         </View>
 
-        <Text style={{ fontSize: 12, marginBottom: 50 }}>
+        <Text style={styles.meetingPreview_host}>
           방장: {meeting.host.name}
         </Text>
 
-        <View style={styles.meetingPreview_card_footer}>
-          <View style={styles.meetingPreview_card_memberView}>
-            <FontAwesome6 name="user-group" iconStyle="solid" />
+        <View style={styles.meetingPreview_footer}>
+          <View style={styles.meetingPreview_metaItem}>
+            <FontAwesome6 name="heart" iconStyle="solid" color={Colors.main} />
+            <Text>{meeting.like}</Text>
+          </View>
+          <View style={styles.meetingPreview_metaItem}>
+            <FontAwesome6
+              name="user-group"
+              iconStyle="solid"
+              color={Colors.guide}
+            />
             <Text>
               {meeting.curMember} / {meeting.maxMember}
             </Text>
           </View>
-
-          <Pressable style={styles.meetingPreview_card_joinButton}>
-            <Text>상세보기</Text>
-          </Pressable>
         </View>
       </Pressable>
     </>

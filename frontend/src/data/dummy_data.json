@@ -1,113 +1,122 @@
 [
   {
-    "id": 1,
-    "title": "React 기초 스터디",
-    "category": "study",
-    "curMember": 4,
-    "maxMember": 8,
-    "expireAt": "2026-01-15T23:59:59Z",
-    "host": { "id": 101, "name": "김민수" }
-  },
-  {
-    "id": 2,
-    "title": "TypeScript 심화",
-    "category": "study",
-    "curMember": 6,
-    "maxMember": 10,
-    "expireAt": "2026-01-20T23:59:59Z",
-    "host": { "id": 102, "name": "이서연" }
-  },
-  {
-    "id": 3,
-    "title": "알고리즘 문제풀이",
-    "category": "study",
-    "curMember": 5,
-    "maxMember": 5,
-    "expireAt": "2026-01-12T18:00:00Z",
-    "host": { "id": 103, "name": "박준호" }
-  },
-
-  {
-    "id": 11,
-    "title": "롤 랭크 게임",
-    "category": "game",
-    "curMember": 3,
-    "maxMember": 5,
-    "expireAt": "2026-01-09T22:00:00Z",
-    "host": { "id": 201, "name": "최지훈" }
-  },
-  {
-    "id": 12,
-    "title": "발로란트 내전",
-    "category": "game",
-    "curMember": 8,
-    "maxMember": 10,
-    "expireAt": "2026-01-11T21:00:00Z",
-    "host": { "id": 202, "name": "정하늘" }
-  },
-  {
-    "id": 13,
-    "title": "피파 친선 경기",
-    "category": "game",
-    "curMember": 2,
-    "maxMember": 4,
-    "expireAt": "2026-01-14T20:00:00Z",
-    "host": { "id": 203, "name": "윤도현" }
-  },
-
-  {
     "id": 21,
+    "category": "exercise",
     "title": "아침 러닝",
-    "category": "exercise",
-    "curMember": 3,
+    "host": { "id": 301, "name": "한유진" },
+    "like": 34,
     "maxMember": 6,
-    "expireAt": "2026-01-07T07:00:00Z",
-    "host": { "id": 301, "name": "한유진" }
+    "curMember": 3,
+    "expireAt": "2026-01-07T07:00:00Z"
   },
-  {
-    "id": 22,
-    "title": "헬스장 PT",
-    "category": "exercise",
-    "curMember": 1,
-    "maxMember": 3,
-    "expireAt": "2026-01-18T20:00:00Z",
-    "host": { "id": 302, "name": "오세훈" }
-  },
-  {
-    "id": 23,
-    "title": "요가 클래스",
-    "category": "exercise",
-    "curMember": 4,
-    "maxMember": 8,
-    "expireAt": "2026-01-21T10:00:00Z",
-    "host": { "id": 303, "name": "김소연" }
-  },
-
   {
     "id": 31,
-    "title": "점심 같이 먹어요",
     "category": "meal",
-    "curMember": 2,
+    "title": "점심 같이 먹어요",
+    "host": { "id": 401, "name": "이준혁" },
+    "like": 16,
     "maxMember": 4,
-    "expireAt": "2026-01-08T12:00:00Z",
-    "host": { "id": 401, "name": "이준혁" }
+    "curMember": 2,
+    "expireAt": "2026-01-08T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "category": "game",
+    "title": "롤 랭크 게임",
+    "host": { "id": 201, "name": "최지훈" },
+    "like": 45,
+    "maxMember": 5,
+    "curMember": 3,
+    "expireAt": "2026-01-09T22:00:00Z"
   },
   {
     "id": 32,
-    "title": "저녁 회식",
     "category": "meal",
-    "curMember": 5,
+    "title": "저녁 회식",
+    "host": { "id": 402, "name": "박지은" },
+    "like": 29,
     "maxMember": 8,
-    "expireAt": "2026-01-10T19:00:00Z",
-    "host": { "id": 402, "name": "박지은" }
+    "curMember": 5,
+    "expireAt": "2026-01-10T19:00:00Z"
   },
   {
     "id": 33,
-    "title": "브런치 모임",
     "category": "meal",
-    "curMember": 3,
+    "title": "브런치 모임",
+    "host": { "id": 403, "name": "정민재" },
+    "like": 22,
     "maxMember": 5,
-    "expireAt": "2026-01-11T11:00:00Z",
-    "host": { "id": 403, "name": "정민재" }
+    "curMember": 3,
+    "expireAt": "2026-01-11T11:00:00Z"
+  },
+  {
+    "id": 12,
+    "category": "game",
+    "title": "발로란트 내전",
+    "host": { "id": 202, "name": "정하늘" },
+    "like": 52,
+    "maxMember": 10,
+    "curMember": 8,
+    "expireAt": "2026-01-11T21:00:00Z"
+  },
+  {
+    "id": 3,
+    "category": "study",
+    "title": "알고리즘 문제풀이",
+    "host": { "id": 103, "name": "박준호" },
+    "like": 18,
+    "maxMember": 5,
+    "curMember": 5,
+    "expireAt": "2026-01-12T18:00:00Z"
+  },
+  {
+    "id": 13,
+    "category": "game",
+    "title": "피파 친선 경기",
+    "host": { "id": 203, "name": "윤도현" },
+    "like": 27,
+    "maxMember": 4,
+    "curMember": 2,
+    "expireAt": "2026-01-14T20:00:00Z"
+  },
+  {
+    "id": 1,
+    "category": "study",
+    "title": "React 기초 스터디",
+    "host": { "id": 101, "name": "김민수" },
+    "like": 23,
+    "maxMember": 8,
+    "curMember": 4,
+    "expireAt": "2026-01-15T23:59:59Z"
+  },
+  {
+    "id": 22,
+    "category": "exercise",
+    "title": "헬스장 PT",
+    "host": { "id": 302, "name": "오세훈" },
+    "like": 19,
+    "maxMember": 3,
+    "curMember": 1,
+    "expireAt": "2026-01-18T20:00:00Z"
+  },
+  {
+    "id": 2,
+    "category": "study",
+    "title": "TypeScript 심화",
+    "host": { "id": 102, "name": "이서연" },
+    "like": 31,
+    "maxMember": 10,
+    "curMember": 6,
+    "expireAt": "2026-01-20T23:59:59Z"
+  },
+  {
+    "id": 23,
+    "category": "exercise",
+    "title": "요가 클래스",
+    "host": { "id": 303, "name": "김소연" },
+    "like": 41,
+    "maxMember": 8,
+    "curMember": 4,
+    "expireAt": "2026-01-21T10:00:00Z"
   }
 ]
