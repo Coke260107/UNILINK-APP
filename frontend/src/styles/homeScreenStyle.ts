@@ -98,4 +98,40 @@ export const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 999,
   },
+
+  // Board Preview
+
+  boardPreview_card: {
+    
+    width: '100%',
+
+    padding: 8,
+
+    backgroundColor: 'white',
+
+
+  },
+
+  boardPreview_card_title: {
+    fontSize: 14,
+
+    fontWeight: '600',
+
+    marginBottom: 2,
+  },
+  boardBottom_font: {
+    fontSize: 12,
+
+    marginBottom: 2,
+    
+  },
+  boardBottom_container: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  boardBottom_items: {
+    flexDirection: 'row',
+
+    gap: 8
+  }
 });

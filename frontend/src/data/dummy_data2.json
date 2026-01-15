@@ -1,0 +1,42 @@
+[
+  {
+    "id": 201,
+    "category": "study",
+    "title": "자료구조 핵심 요약",
+    "content": "스택, 큐, 트리를 한 번에 정리한 요약본입니다.",
+    "like": 58,
+    "commentCount": 14
+  },
+  {
+    "id": 202,
+    "category": "game",
+    "title": "요즘 핫한 게임 추천",
+    "content": "최근 많이 하는 게임들과 간단한 후기를 공유합니다.",
+    "like": 41,
+    "commentCount": 9
+  },
+  {
+    "id": 203,
+    "category": "meal",
+    "title": "학교 근처 혼밥 맛집",
+    "content": "혼자 가기 좋은 가성비 식당 리스트입니다.",
+    "like": 67,
+    "commentCount": 18
+  },
+  {
+    "id": 204,
+    "category": "exercise",
+    "title": "집에서 하는 홈트 루틴",
+    "content": "기구 없이 가능한 전신 운동 루틴을 정리했습니다.",
+    "like": 36,
+    "commentCount": 7
+  },
+  {
+    "id": 205,
+    "category": "study",
+    "title": "TypeScript 실전 팁",
+    "content": "프로젝트에서 자주 쓰는 타입 설계 노하우입니다.",
+    "like": 52,
+    "commentCount": 11
+  }
+]

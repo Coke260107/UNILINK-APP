@@ -9,8 +9,9 @@ export type Meeting = {
   category: Category;
   title: string;
   host: User;
+  like: number;
   maxMember: number;
   curMember: number;
   expireAt: string;
-  like: number;
+
 };
