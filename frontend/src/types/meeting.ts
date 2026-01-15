@@ -6,10 +6,11 @@ import type { User } from './user';
 
 export type Meeting = {
   id: number;
-  title: string;
   category: Category;
+  title: string;
+  host: User;
   maxMember: number;
   curMember: number;
   expireAt: string;
-  host: User;
+  like: number;
 };
