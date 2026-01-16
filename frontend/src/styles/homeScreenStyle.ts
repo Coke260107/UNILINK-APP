@@ -12,6 +12,24 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  footer_container: {
+    flexDirection: 'row',
+
+    gap: 16,
+  },
+
+  footer_metaItem: {
+    flexDirection: 'row',
+
+    alignItems: 'center',
+
+    gap: 8,
+  },
+
+  footer_metaItem_text: {
+    fontSize: 12,
+  },
+
   // Search Bar
   search_bar: {
     flexDirection: 'row',
@@ -75,65 +93,22 @@ export const styles = StyleSheet.create({
     marginBottom: 50,
   },
 
-  meetingPreview_footer: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  meetingPreview_metaItem: {
-    flexDirection: 'row',
-
-    alignItems: 'center',
-
-    gap: 8,
-  },
-
-  meetingPreview_card_joinButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-
-    backgroundColor: 'transparent',
-
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 999,
-  },
-
   // Board Preview
-
-  boardPreview_card: {
-    
-    width: '100%',
-
-    padding: 8,
+  boardPreview_board: {
+    paddingHorizontal: 8,
+    paddingBottom: 8,
 
     backgroundColor: 'white',
-
-
   },
 
-  boardPreview_card_title: {
-    fontSize: 14,
+  boardPreview_board_title: {
+    marginBottom: 2,
 
+    fontSize: 16,
     fontWeight: '600',
-
-    marginBottom: 2,
   },
-  boardBottom_font: {
+
+  boardPreview_board_content: {
     fontSize: 12,
-
-    marginBottom: 2,
-    
   },
-  boardBottom_container: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  boardBottom_items: {
-    flexDirection: 'row',
-
-    gap: 8
-  }
 });

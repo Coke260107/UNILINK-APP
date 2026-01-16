@@ -6,20 +6,20 @@ import { StyleSheet } from 'react-native';
 import Colors from '../utils/color';
 
 const globalStyle = StyleSheet.create({
-  base_scroll_container: {
+  scroll_container: {
     flex: 1,
 
     backgroundColor: Colors.background,
   },
 
-  base_scroll_content_container: {
+  scroll_content_container: {
     paddingHorizontal: 12,
     paddingBottom: 12,
 
     gap: 12,
   },
 
-  base_card: {
+  card: {
     padding: 16,
 
     backgroundColor: 'white',
@@ -29,12 +29,12 @@ const globalStyle = StyleSheet.create({
     borderRadius: 12,
   },
 
-  base_card_title: {
-    fontSize: 18,
+  card_title: {
+    fontSize: 20,
     fontWeight: '800',
   },
 
-  base_guide: {
+  guide_text: {
     fontSize: 14,
     color: Colors.guide,
   },

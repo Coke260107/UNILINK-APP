@@ -54,8 +54,8 @@ export default function HomeScreen() {
   return (
     <>
       <ScrollView
-        style={globalStyle.base_scroll_container}
-        contentContainerStyle={globalStyle.base_scroll_content_container}
+        style={globalStyle.scroll_container}
+        contentContainerStyle={globalStyle.scroll_content_container}
         showsVerticalScrollIndicator={false}
       >
         {/* Search Bar */}
@@ -77,16 +77,16 @@ export default function HomeScreen() {
         </View>
 
         {/* Meeting Preview */}
-        <View style={[globalStyle.base_card]}>
+        <View style={[globalStyle.card]}>
           <View style={styles.header_container}>
-            <Text style={globalStyle.base_card_title}>인기 모임</Text>
+            <Text style={globalStyle.card_title}>인기 모임</Text>
             <Pressable>
-              <Text style={globalStyle.base_guide}>
+              <Text style={globalStyle.guide_text}>
                 더보기{' '}
                 <FontAwesome6
                   name="angle-right"
                   iconStyle="solid"
-                  style={globalStyle.base_guide}
+                  style={globalStyle.guide_text}
                 />
               </Text>
             </Pressable>
@@ -103,16 +103,16 @@ export default function HomeScreen() {
         </View>
 
         {/* Board Preview */}
-        <View style={[globalStyle.base_card]}>
+        <View style={[globalStyle.card]}>
           <View style={styles.header_container}>
-            <Text style={globalStyle.base_card_title}>인기 게시물</Text>
+            <Text style={globalStyle.card_title}>인기 게시물</Text>
             <Pressable>
-              <Text style={globalStyle.base_guide}>
+              <Text style={globalStyle.guide_text}>
                 더보기{' '}
                 <FontAwesome6
                   name="angle-right"
                   iconStyle="solid"
-                  style={globalStyle.base_guide}
+                  style={globalStyle.guide_text}
                 />
               </Text>
             </Pressable>
@@ -120,44 +120,19 @@ export default function HomeScreen() {
 
           <View>
             {boards.map(item => (
-              <View key={item.id} style={styles.boardPreview_card}>
-                <Text style={styles.boardPreview_card_title}>{item.title}</Text>
-                <Text style={styles.boardBottom_font}>{item.content}</Text>
-                <View style={styles.boardBottom_container}>
-                  <View style={styles.boardBottom_items}>
-                    <FontAwesome6
-                      style={{ marginTop: 2 }}
-                      name="heart"
-                      iconStyle="solid"
-                      color={Colors.main}
-                    />
-                    <Text style={styles.boardBottom_font}>{item.like}</Text>
-                  </View>
-                  <View style={styles.boardBottom_items}>
-                    <FontAwesome6
-                      style={{ marginTop: 2 }}
-                      name="comments"
-                      iconStyle="solid"
-                      color={Colors.guide}
-                    />
-                    <Text style={styles.boardBottom_font}>
-                      {item.commentCount}
-                    </Text>
-                  </View>
-                </View>
-              </View>
+              <BoardPreview key={item.id} item={item} />
             ))}
           </View>
         </View>
 
         {/* Calendar */}
-        <View style={globalStyle.base_card}>
+        <View style={globalStyle.card}>
           <View style={[styles.header_container, { marginBottom: 4 }]}>
-            <Text style={globalStyle.base_card_title}>나의 일정</Text>
+            <Text style={globalStyle.card_title}>나의 일정</Text>
             <FontAwesome6
               name="angle-right"
               iconStyle="solid"
-              style={globalStyle.base_guide}
+              style={globalStyle.guide_text}
             />
           </View>
           <HomeCalendar />
@@ -203,23 +178,44 @@ function MeetingPreviewCard({ meeting }: { meeting: Meeting }) {
           방장: {meeting.host.name}
         </Text>
 
-        <View style={styles.meetingPreview_footer}>
-          <View style={styles.meetingPreview_metaItem}>
+        <View style={styles.footer_container}>
+          <View style={styles.footer_metaItem}>
             <FontAwesome6 name="heart" iconStyle="solid" color={Colors.main} />
-            <Text>{meeting.like}</Text>
+            <Text style={styles.footer_metaItem_text}>{meeting.like}</Text>
           </View>
-          <View style={styles.meetingPreview_metaItem}>
+          <View style={styles.footer_metaItem}>
             <FontAwesome6
               name="user-group"
               iconStyle="solid"
               color={Colors.guide}
             />
-            <Text>
+            <Text style={styles.footer_metaItem_text}>
               {meeting.curMember} / {meeting.maxMember}
             </Text>
           </View>
         </View>
       </Pressable>
     </>
+  );
+}
+
+function BoardPreview({ item }: { item: boardPopular }) {
+  return (
+    <Pressable style={styles.boardPreview_board}>
+      <Text style={styles.boardPreview_board_title}>{item.title}</Text>
+      <Text style={styles.boardPreview_board_content}>{item.content}</Text>
+
+      <View style={styles.footer_container}>
+        <View style={styles.footer_metaItem}>
+          <FontAwesome6 name="heart" iconStyle="solid" color={Colors.main} />
+          <Text style={styles.footer_metaItem_text}>{item.like}</Text>
+        </View>
+
+        <View style={styles.footer_metaItem}>
+          <FontAwesome6 name="comment" iconStyle="solid" color={Colors.guide} />
+          <Text style={styles.footer_metaItem_text}>{item.commentCount}</Text>
+        </View>
+      </View>
+    </Pressable>
   );
 }
