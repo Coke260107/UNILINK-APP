@@ -1,15 +1,15 @@
 import { View, Text, ScrollView, Pressable } from 'react-native';
 
 // Type
-import { Category, CATEGORY_LABEL, CATEGORY_VALUE } from '../types/category';
+import { Category, CATEGORY_LABEL, CATEGORY_VALUE } from '../../types/category';
 const CATEGORY_FILTER = ['all', ...CATEGORY_VALUE] as const;
 type CategroyFilter = (typeof CATEGORY_FILTER)[number];
 
 // Style
-import globalStyle from '../styles/globalStyle';
-import styles from '../styles/chattingListScreenStyle';
-import Colors from '../utils/color';
-import CategoryIcons from '../utils/icon';
+import globalStyle from '../../../globalStyle';
+import styles from './styles';
+import Colors from '../../utils/color';
+import CategoryIcons from '../../utils/icon';
 import { useState } from 'react';
 
 function ChattingListScreen() {
@@ -18,8 +18,8 @@ function ChattingListScreen() {
   return (
     <>
       <ScrollView
-        style={globalStyle.base_scroll_container}
-        contentContainerStyle={globalStyle.base_scroll_content_container}
+        style={globalStyle.scroll_container}
+        contentContainerStyle={globalStyle.scroll_content_container}
       >
         <ScrollView
           horizontal

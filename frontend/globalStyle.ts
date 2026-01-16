@@ -3,7 +3,7 @@
 import { StyleSheet } from 'react-native';
 
 // Style
-import Colors from '../utils/color';
+import Colors from './src/utils/color';
 
 const globalStyle = StyleSheet.create({
   scroll_container: {

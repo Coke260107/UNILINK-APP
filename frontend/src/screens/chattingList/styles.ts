@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colors from '../utils/color';
+import Colors from '../../utils/color';
 
 const styles = StyleSheet.create({
   category_container: {

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import Colors from '../utils/color';
+import Colors from '../../utils/color';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   // Base
   header_container: {
     flexDirection: 'row',
@@ -112,3 +112,5 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+export default styles;

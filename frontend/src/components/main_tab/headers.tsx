@@ -4,16 +4,6 @@ import { Text, View, Pressable } from 'react-native';
 import styles from './headerStyle';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
-export function ServerPingTestTitle() {
-  return (
-    <>
-      <View>
-        <Text style={styles.base_title}>서버 통신 테스트</Text>
-      </View>
-    </>
-  );
-}
-
 export function HomeScreenTitle() {
   return (
     <>

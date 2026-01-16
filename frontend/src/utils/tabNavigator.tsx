@@ -1,3 +1,4 @@
+import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -6,9 +7,8 @@ import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Screen
-import HomeScreen from '../screens/homeScreen';
-import ChattingListScreen from '../screens/chattingListScreen';
-import BackendPingTestScreen from '../screens/backendPingTestScreen';
+import HomeScreen from '../screens/home/HomeScreen';
+import ChattingListScreen from '../screens/chattingList/ChattingListScreen';
 
 // Type
 import type { MainTabParamList } from '../types/navigation';
@@ -17,7 +17,6 @@ import Colors from './color';
 
 // Component
 import {
-  ServerPingTestTitle,
   HomeScreenTitle,
   ChattingListTitle,
   ChattingListRightHeader,
@@ -42,26 +41,12 @@ function MainTab() {
         tabBarActiveTintColor: Colors.main, // Active Color
         tabBarStyle: {
           backgroundColor: Colors.background, // Background Color
+
+          borderWidth: 1,
+          borderColor: Colors.border,
         },
       }}
     >
-      <Tab.Screen
-        name="BackendPingTest"
-        component={BackendPingTestScreen}
-        options={{
-          headerTitle: () => <ServerPingTestTitle />,
-
-          tabBarLabel: '통신 테스트',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome5
-              name="broadcast-tower"
-              iconStyle="solid"
-              size={16}
-              color={color}
-            />
-          ),
-        }}
-      />
       <Tab.Screen
         name="Home"
         component={HomeScreen}
