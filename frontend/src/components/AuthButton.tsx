@@ -16,9 +16,6 @@ export default function KakaoButton() {
       </View>
 
       <Text style={kakaoButtonStyle.text}>카카오로 시작하기</Text>
-
-      {/* 텍스트 중앙 정렬용 더미 */}
-      <View style={kakaoButtonStyle.spacer} />
     </Pressable>
   );
 }
