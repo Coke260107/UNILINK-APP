@@ -6,6 +6,18 @@ import { StyleSheet } from 'react-native';
 import Colors from './src/utils/color';
 
 const globalStyle = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+
+    color: Colors.background,
+  },
+
+  base_container: {
+    flex: 1,
+
+    paddingHorizontal: 12,
+  },
+
   scroll_container: {
     flex: 1,
 
