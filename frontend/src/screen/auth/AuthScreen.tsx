@@ -40,7 +40,7 @@ function AuthScreen({ navigation }: Props) {
           <Text style={styles.subTitle}>모임의 시작, UNILINK</Text>
         </View>
         <View style={styles.bottom_container}>
-          <KakaoButton onPress={() => handleAuthBUtton} />
+          <KakaoButton onPress={() => null} />
         </View>
       </SafeAreaView>
     </>
