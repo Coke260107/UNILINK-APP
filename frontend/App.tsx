@@ -5,8 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { LocaleConfig } from 'react-native-calendars';
 
 // Util
-import Colors from './src/utils/color';
-import StackNavigator from './src/utils/stackNavigator';
+import Colors from './src/utility/color';
+
+// Navigator
+import StackNavigator from './src/navigator/StackNavigator';
 
 // Calendars locale Setting
 LocaleConfig.locales['ko'] = {

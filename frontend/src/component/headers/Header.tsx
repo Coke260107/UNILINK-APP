@@ -1,10 +1,10 @@
 import { Text, View, Pressable } from 'react-native';
 
 // Style
-import styles from './headerStyle';
+import styles from './Header.style';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
-export function HomeScreenTitle() {
+export function HomeScreenHeader() {
   return (
     <>
       <View>
@@ -14,7 +14,7 @@ export function HomeScreenTitle() {
   );
 }
 
-export function ChattingListTitle() {
+export function ChattingListHeader() {
   return (
     <>
       <View>
@@ -33,6 +33,23 @@ export function ChattingListRightHeader() {
             name="magnifying-glass"
             iconStyle="solid"
             size={18}
+            color={'black'}
+          />
+        </Pressable>
+      </View>
+    </>
+  );
+}
+
+export function SingleBackHeader() {
+  return (
+    <>
+      <View>
+        <Pressable>
+          <FontAwesome6
+            name="chevron-left"
+            iconStyle="solid"
+            size={12}
             color={'black'}
           />
         </Pressable>

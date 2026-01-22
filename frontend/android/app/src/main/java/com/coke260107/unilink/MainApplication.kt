@@ -1,4 +1,4 @@
-package com.frontend
+package com.coke260107.unilink
 
 import android.app.Application
 import com.facebook.react.PackageList

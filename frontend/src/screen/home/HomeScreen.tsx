@@ -12,12 +12,12 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Component
-import { HomeCalendar } from '../../components/calendar';
+import { HomeCalendar } from '../../component/calendars/calendar';
 
 // Style
 import globalStyle from '../../../globalStyle';
 import styles from './styles';
-import Colors from '../../utils/color';
+import Colors from '../../utility/color';
 
 // Test Data
 import meeting_dummy from '../../data/dummy_data.json';
@@ -25,17 +25,17 @@ import board_dummy from '../../data/dummy_data2.json';
 
 // Icon
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
-import CategoryIcons from '../../utils/icon';
+import CategoryIcons from '../../utility/icon';
 
 // Type
 import {
   CATEGORY_VALUE,
   CATEGORY_LABEL,
   type Category,
-} from '../../types/category';
-import { boardPopular } from '../../types/board';
+} from '../../type/category';
+import { boardPopular } from '../../type/board';
 
-import type { Meeting } from '../../types/meeting';
+import type { Meeting } from '../../type/meeting';
 
 export default function HomeScreen() {
   const [meetings, setMeetings] = useState<Meeting[]>(

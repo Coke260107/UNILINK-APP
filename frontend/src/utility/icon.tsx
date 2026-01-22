@@ -3,7 +3,7 @@ import React from 'react';
 import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
-import type { Category } from '../types/category';
+import type { Category } from '../type/category';
 
 type Props = {
   category: Category;

@@ -1,7 +1,7 @@
-// Nav
+// Base
 export type RootStackParamList = {
   Home: undefined;
-  Auth: undefined;
+  AuthStack: undefined;
   MainTab: undefined;
 };
 
@@ -9,4 +9,10 @@ export type RootStackParamList = {
 export type MainTabParamList = {
   Home: undefined;
   ChattingList: undefined;
+};
+
+// Auth
+export type AuthStackParamList = {
+  Auth: undefined;
+  Name: undefined;
 };

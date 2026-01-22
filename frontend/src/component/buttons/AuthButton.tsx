@@ -3,9 +3,14 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-export default function KakaoButton() {
+// Type
+type Props = {
+  onPress: () => void;
+};
+
+export default function KakaoButton({ onPress }: Props) {
   return (
-    <Pressable style={kakaoButtonStyle.button}>
+    <Pressable style={kakaoButtonStyle.button} onPress={onPress}>
       <View style={kakaoButtonStyle.iconArea}>
         <Svg width={24} height={24} viewBox="0 0 24 24">
           <Path
@@ -38,8 +43,5 @@ const kakaoButtonStyle = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     color: '#000',
-  },
-  spacer: {
-    width: 24,
   },
 });

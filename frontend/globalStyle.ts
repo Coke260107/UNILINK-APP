@@ -3,19 +3,21 @@
 import { StyleSheet } from 'react-native';
 
 // Style
-import Colors from './src/utils/color';
+import Colors from './src/utility/color';
 
 const globalStyle = StyleSheet.create({
   safeAreaView: {
     flex: 1,
 
-    color: Colors.background,
+    backgroundColor: Colors.background,
   },
 
   base_container: {
     flex: 1,
 
-    paddingHorizontal: 12,
+    paddingHorizontal: 24,
+
+    backgroundColor: Colors.background,
   },
 
   scroll_container: {

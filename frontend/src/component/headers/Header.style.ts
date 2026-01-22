@@ -3,7 +3,7 @@
 import { StyleSheet } from 'react-native';
 
 // Util
-import Colors from '../../utils/color';
+import Colors from '../../utility/color';
 
 const styles = StyleSheet.create({
   base_title: {

@@ -7,23 +7,28 @@ import FontAwesome5 from '@react-native-vector-icons/fontawesome5';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Screen
-import HomeScreen from '../screens/home/HomeScreen';
-import ChattingListScreen from '../screens/chattingList/ChattingListScreen';
+import HomeScreen from '../screen/home/HomeScreen';
+import ChattingListScreen from '../screen/chattingList/ChattingListScreen';
 
 // Type
-import type { MainTabParamList } from '../types/navigation';
+import type { MainTabParamList } from '../type/navigation';
 import { StyleSheet, Text } from 'react-native';
-import Colors from './color';
+import Colors from '../utility/color';
 
 // Component
 import {
-  HomeScreenTitle,
-  ChattingListTitle,
+  HomeScreenHeader,
+  ChattingListHeader,
   ChattingListRightHeader,
-} from '../components/main_tab/headers';
+} from '../component/headers/Header';
+// import {
+//   HomeScreenTitle,
+//   ChattingListTitle,
+//   ChattingListRightHeader,
+// } from '../components/header/headers';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
-function MainTab() {
+function MainTabNavigator() {
   const insets = useSafeAreaInsets();
 
   return (
@@ -51,7 +56,7 @@ function MainTab() {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: () => <HomeScreenTitle />,
+          headerTitle: () => <HomeScreenHeader />,
 
           tabBarLabel: '홈',
           tabBarIcon: ({ color }) => (
@@ -70,7 +75,7 @@ function MainTab() {
         component={ChattingListScreen}
         options={{
           // Header Style
-          headerTitle: () => <ChattingListTitle />,
+          headerTitle: () => <ChattingListHeader />,
           headerRight: () => <ChattingListRightHeader />,
 
           // TabBar Style
@@ -89,7 +94,7 @@ function MainTab() {
   );
 }
 
-export default MainTab;
+export default MainTabNavigator;
 
 const styles = StyleSheet.create({
   title: {

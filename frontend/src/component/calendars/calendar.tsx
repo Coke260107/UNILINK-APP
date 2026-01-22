@@ -1,7 +1,9 @@
 // src/components/Calendar.tsx
 import React from 'react';
 import { Calendar } from 'react-native-calendars';
-import Colors from '../utils/color';
+
+// Style
+import Colors from '../../utility/color';
 
 export function HomeCalendar() {
   return (
