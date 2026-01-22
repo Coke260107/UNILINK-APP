@@ -1,6 +1,9 @@
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+// Api
+import * as api from '../../api/auth/Auth.api';
+
 // Component
 import KakaoButton from '../../component/buttons/AuthButton';
 
@@ -11,6 +14,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthStackParamList } from '../../type/navigation';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Auth'>;
+
+async function handleAuthBUtton() {
+  console.log('실행됨');
+  try {
+    const authCode = await api.getKakaoAuthCode();
+    console.log(authCode);
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+}
 
 function AuthScreen({ navigation }: Props) {
   return (
@@ -26,7 +40,7 @@ function AuthScreen({ navigation }: Props) {
           <Text style={styles.subTitle}>모임의 시작, UNILINK</Text>
         </View>
         <View style={styles.bottom_container}>
-          <KakaoButton onPress={() => navigation.navigate('Name')} />
+          <KakaoButton onPress={() => handleAuthBUtton} />
         </View>
       </SafeAreaView>
     </>
