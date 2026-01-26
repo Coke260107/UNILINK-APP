@@ -7,4 +7,5 @@ export type RootStackParamList = {
 
 export type AuthStackParamList = {
   Auth: undefined;
+  Name: { accessToken: string };
 };

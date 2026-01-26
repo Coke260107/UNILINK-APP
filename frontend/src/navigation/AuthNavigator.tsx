@@ -5,6 +5,7 @@ import AuthScreen from '../screen/auth/AuthScreen';
 
 // Type
 import type { AuthStackParamList } from './type';
+import SetNicknameScreen from '../screen/profile/SetNickNameScreen';
 
 // ============================================================
 
@@ -30,6 +31,8 @@ export default function AuthNavigator() {
           component={AuthScreen}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen name="Name" component={SetNicknameScreen} />
       </Stack.Navigator>
     </>
   );

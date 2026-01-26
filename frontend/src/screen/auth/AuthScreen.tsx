@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -11,19 +12,22 @@ import GlobalStyle, { Color } from '../../../globalStyle';
 
 // Type
 import { AuthStackParamList } from '../../navigation/type';
-import { useState } from 'react';
 type Props = NativeStackScreenProps<AuthStackParamList, 'Auth'>;
 
 // ============================================================
 
 // Main
 export default function AuthScreen({ navigation }: Props) {
-  const [res, setRes] = useState<KakaoLoginToken | null>();
-
+  const [accessToken, setAccessToken] = useState<String>('');
   // Handle
-  const onLogin = async () => {
-    const data = await login();
-    console.log(data);
+  const handleAuthForKakao = async () => {
+    try {
+      const { accessToken } = await login();
+      setAccessToken(accessToken);
+      navigation.navigate('Name', { accessToken: accessToken });
+    } catch (e) {
+      console.log(`Error: ${e}`);
+    }
   };
 
   return (
@@ -41,7 +45,7 @@ export default function AuthScreen({ navigation }: Props) {
           </View>
 
           <View style={[style.bottom_container]}>
-            <KakaoButton onPress={onLogin} />
+            <KakaoButton onPress={handleAuthForKakao} />
           </View>
         </View>
       </SafeAreaView>

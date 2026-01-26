@@ -29,7 +29,7 @@ export default function KakaoButton({ onPress }: Props) {
 // Style
 const kakaoButtonStyle = StyleSheet.create({
   button: {
-    height: 48,
+    height: 44,
     borderRadius: 12,
     backgroundColor: '#FEE500',
     flexDirection: 'row',
