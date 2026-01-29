@@ -1,4 +1,4 @@
-package com.unilink.backend.domain.user;
+package com.unilink.backend.domain.user.enums;
 
 public enum Mbti {
     PRIVATE,
