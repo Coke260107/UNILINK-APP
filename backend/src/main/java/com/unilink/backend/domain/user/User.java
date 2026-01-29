@@ -1,5 +1,9 @@
 package com.unilink.backend.domain.user;
 
+import com.unilink.backend.domain.user.enums.AgeRange;
+import com.unilink.backend.domain.user.enums.Gender;
+import com.unilink.backend.domain.user.enums.Mbti;
+import com.unilink.backend.domain.user.enums.UserState;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -48,8 +52,9 @@ public class User {
     @Column(name = "introduction")
     private String introduction;
 
-//    @Column(name="age")
-//    연령 어떻게 할지 확정된 후 제작 예정
+    @Column(name = "age_range")
+    @Enumerated(EnumType.STRING)
+    private AgeRange age;
 
     @Column(name = "location")
     private String location;
@@ -72,12 +77,13 @@ public class User {
     }
 
     public void updateProfile(String nickname, String profileImage, Mbti mbti, Gender gender,
-                              String introduction, String location) {
+                              String introduction, AgeRange ageRange, String location) {
         this.nickname = nickname;
         this.profileImage = profileImage;
         this.mbti = mbti;
         this.gender = gender;
         this.introduction = introduction;
+        this.age = ageRange;
         this.location = location;
     }
 
