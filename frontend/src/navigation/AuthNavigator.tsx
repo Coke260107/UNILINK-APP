@@ -6,6 +6,8 @@ import AuthScreen from '../screen/auth/AuthScreen';
 // Type
 import type { AuthStackParamList } from './type';
 import SetNicknameScreen from '../screen/profile/SetNickNameScreen';
+import { Color } from '../../globalStyle';
+import SetUserMetaData0Screen from '../screen/profile/SetUserMetaData0Screen';
 
 // ============================================================
 
@@ -17,22 +19,11 @@ export default function AuthNavigator() {
     <>
       <Stack.Navigator
         initialRouteName="Auth"
-        screenOptions={{
-          title: '',
-
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: 'rgb(250, 250, 250)',
-          },
-        }}
+        screenOptions={{ headerShown: false }}
       >
-        <Stack.Screen
-          name="Auth"
-          component={AuthScreen}
-          options={{ headerShown: false }}
-        />
-
+        <Stack.Screen name="Auth" component={AuthScreen} />
         <Stack.Screen name="Name" component={SetNicknameScreen} />
+        <Stack.Screen name="UserMetaData0" component={SetUserMetaData0Screen} />
       </Stack.Navigator>
     </>
   );

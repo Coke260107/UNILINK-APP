@@ -2,11 +2,16 @@ import { StyleSheet } from 'react-native';
 
 export const Color = {
   background: 'rgb(250, 250, 250)', // Neutral-50
-  border: 'rgb(229, 229, 229)', // Neutral-300
+  border: 'rgba(161, 161, 161, 0.4)', // Neutral-400/40
 
   main: 'rgb(255, 100, 103)', // Red-400
+  main_disabled: 'rgba(255, 100, 103, 0.4)',
 
   // Text
+  text: 'black',
+  button_text: 'white',
+
+  text_disabled: 'rgba(255, 255, 255, 0.5)',
   guideText: 'rgb(161, 161, 161)', // Neutral-400
 };
 
@@ -22,8 +27,6 @@ const GlobalStyle = StyleSheet.create({
 
     paddingHorizontal: 24,
     paddingBottom: 24,
-
-    backgroundColor: Color.background,
   },
 });
 

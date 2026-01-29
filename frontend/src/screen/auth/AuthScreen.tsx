@@ -14,31 +14,46 @@ import GlobalStyle, { Color } from '../../../globalStyle';
 import { AuthStackParamList } from '../../navigation/type';
 type Props = NativeStackScreenProps<AuthStackParamList, 'Auth'>;
 
-// ============================================================
-
-// Main
+// ==================== Main ==================== //
 export default function AuthScreen({ navigation }: Props) {
-  const [accessToken, setAccessToken] = useState<String>('');
+  const [token, setToken] = useState<string>(''); // = accessToken
+  const [loading, setLoading] = useState<boolean>(false);
+
   // Handle
+  /**
+   * 카카오톡 로그인 버튼 시 실행되는 handle
+   * @returns
+   */
   const handleAuthForKakao = async () => {
+    if (loading) return;
+    setLoading(true);
+
     try {
-      const { accessToken } = await login();
-      setAccessToken(accessToken);
-      navigation.navigate('Name', { accessToken: accessToken });
+      let nextToken = token;
+
+      if (!nextToken) {
+        const { accessToken, idToken } = await login();
+        nextToken = accessToken;
+        setToken(nextToken);
+      }
+
+      if (!nextToken) {
+        console.log('[log] nextToken is empty');
+        return;
+      }
+
+      navigation.navigate('Name', { accessToken: nextToken });
     } catch (e) {
       console.log(`Error: ${e}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <SafeAreaView style={[GlobalStyle.safeAreaView]}>
-        <View
-          style={[
-            GlobalStyle.base_container,
-            { justifyContent: 'space-between' },
-          ]}
-        >
+        <View style={[GlobalStyle.base_container, style.root_container]}>
           <View style={[style.top_container]}>
             <Text style={[style.title]}>UNILINK</Text>
             <Text style={[style.subTitle]}>모임의 시작, UNILINK</Text>
@@ -53,10 +68,12 @@ export default function AuthScreen({ navigation }: Props) {
   );
 }
 
-// ============================================================
-
-// Style
+// ==================== Style ==================== //
 const style = StyleSheet.create({
+  root_container: {
+    justifyContent: 'space-between',
+  },
+
   top_container: {
     justifyContent: 'center',
     alignItems: 'center',

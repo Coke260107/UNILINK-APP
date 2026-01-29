@@ -1,72 +1,132 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Keyboard,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
   View,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
 } from 'react-native';
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useHeaderHeight } from '@react-navigation/elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 // Style
 import GlobalStyle, { Color } from '../../../globalStyle';
+import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Type
 import type { AuthStackParamList } from '../../navigation/type';
 type Props = NativeStackScreenProps<AuthStackParamList, 'Name'>;
 
-// ============================================================
+// ==================== Main Component ==================== //
+export default function SetNicknameScreen({ navigation, route }: Props) {
+  const [nickname, setNickname] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-// Main
-export default function SetNicknameScreen({ navigation }: Props) {
-  const { bottom } = useSafeAreaInsets();
-  const headerHeight = useHeaderHeight();
+  const isValidNickname = nickname.trim().length > 0;
+  const isDisabled = loading || !isValidNickname;
+
+  // ==================== Handle ==================== //
+  const handleBackPressable = () => {
+    navigation.goBack();
+  };
+
+  const handleNextPressable = () => {
+    if (isDisabled) return;
+
+    setLoading(true);
+
+    Keyboard.dismiss();
+
+    const delay = 500;
+
+    setTimeout(() => {
+      const { accessToken } = route.params;
+
+      navigation.navigate('UserMetaData0', {
+        accessToken,
+        nickname: nickname.trim(),
+      });
+
+      setLoading(false);
+    }, delay);
+  };
 
   return (
-    <>
-      <View
-        style={[GlobalStyle.base_container, { paddingBottom: bottom + 24 }]}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={headerHeight}
-          style={{ flex: 1 }}
-          contentContainerStyle={{ flex: 1 }}
-          enabled={Platform.OS === 'ios' ? true : false}
-        >
-          <ScrollView
-            contentContainerStyle={{ flex: 1, justifyContent: 'space-between' }}
-          >
-            <View>
-              <Text style={style.title}>이름을 가르쳐주세요!</Text>
-              <TextInput style={style.nickName_textInput} placeholder="이름" />
-            </View>
-
-            <View>
-              <Pressable style={[style.next_pressable]}>
-                <Text style={style.next_text}>다음</Text>
-              </Pressable>
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
+    <SafeAreaView style={GlobalStyle.safeAreaView}>
+      {/* Header */}
+      <View style={style.header}>
+        <Pressable onPress={handleBackPressable}>
+          <FontAwesome6 name="angle-left" iconStyle="solid" size={20} />
+        </Pressable>
       </View>
-    </>
+
+      {/* Main Content */}
+      <KeyboardAwareScrollView
+        style={[style.scroll]}
+        contentContainerStyle={[style.scroll_content]}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={[style.root_container]}>
+          <View>
+            <Text style={style.title}>이름을 가르쳐주세요</Text>
+            <TextInput
+              placeholder="이름"
+              value={nickname}
+              onChangeText={val => setNickname(val)}
+              maxLength={20}
+              autoFocus={true}
+              style={style.nickName_textInput}
+            />
+          </View>
+
+          <View>
+            <Pressable
+              onPress={handleNextPressable}
+              disabled={isDisabled}
+              style={[
+                style.next_pressable,
+                isDisabled && style.next_pressable_disabled,
+              ]}
+            >
+              <Text
+                style={[
+                  style.next_text,
+                  isDisabled && style.next_text_disabled,
+                ]}
+              >
+                다음
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 }
 
-// ============================================================
-
-// Style
 const style = StyleSheet.create({
+  header: {
+    justifyContent: 'center',
+    paddingHorizontal: 12,
+    height: 56,
+    backgroundColor: Color.background,
+  },
+
+  scroll: {
+    flex: 1,
+  },
+
+  scroll_content: {
+    flexGrow: 1,
+
+    paddingHorizontal: 24,
+  },
+
   root_container: {
+    flex: 1,
+
     justifyContent: 'space-between',
   },
 
@@ -77,26 +137,31 @@ const style = StyleSheet.create({
 
   nickName_textInput: {
     height: 52,
-
     borderBottomWidth: 1,
-
+    borderColor: Color.border,
     fontSize: 18,
+    marginTop: 40,
   },
 
   next_pressable: {
-    height: 44,
-
+    height: 52, // 높이를 조금 키우면 터치가 편합니다
     justifyContent: 'center',
     alignItems: 'center',
-
     backgroundColor: Color.main,
-
     borderRadius: 16,
+  },
+
+  next_pressable_disabled: {
+    backgroundColor: Color.main_disabled,
   },
 
   next_text: {
     fontSize: 16,
     fontWeight: '600',
     color: 'white',
+  },
+
+  next_text_disabled: {
+    color: Color.text_disabled,
   },
 });
