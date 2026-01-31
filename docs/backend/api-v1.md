@@ -15,9 +15,8 @@
 ### `Login`
 - **제공값**
 	- `accessToken: string`
-	- `idToken: string`
 - **반환값**
-	- *`userRole: UserRole`*
+	- *`userRole: UserRoleType`*
 	- `jwt: string`
 
 ---
@@ -50,7 +49,7 @@
 
 ---
 # Enum
-## *`UserRole`*
+## *`UserRoleType`*
 ``` ts
 // UserRole //
 type UserRole = 'Guest' | 'User' | 'Banned';
@@ -82,3 +81,4 @@ type AgeType =
 	| 'AGE_60'
 	| 'PRIVATE';
 ```
+
