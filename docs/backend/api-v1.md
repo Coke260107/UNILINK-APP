@@ -14,7 +14,7 @@
 ## API
 ### `Auth`
 - **제공값**
-	- `KakaoAccessToken: string`
+	- `kakaoAccessToken: string`
 - **반환값**
 	- *`userRole: UserRoleType`*
 	- `jwt: string`
@@ -81,6 +81,7 @@ type AgeType =
 	| 'AGE_60'
 	| 'PRIVATE';
 ```
+
 
 
 
