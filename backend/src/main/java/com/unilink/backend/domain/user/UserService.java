@@ -69,4 +69,9 @@ public class UserService {
         User updateUser = updateProfile(userId, request);
         return ProfileEditResponseDto.from(updateUser);
     }
+
+    public NickNameValidResponseDto checkNicknameDuplicate(Long userId, String nickname) {
+        boolean isDuplicate = userRepository.existsByNicknameAndUserIdNot(nickname, userId);
+        return NickNameValidResponseDto.from(!isDuplicate);
+    }
 }

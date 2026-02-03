@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByKakaoId(Long kakaoId);
+
+    boolean existsByNicknameAndUserIdNot(String nickname, Long id);
 }
