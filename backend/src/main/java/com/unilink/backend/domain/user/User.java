@@ -31,7 +31,7 @@ public class User {
     @Column(name = "kakao_id", nullable = false)
     private Long kakaoId;
 
-    @Column(name = "nickname")
+    @Column(name = "nickname", length = 20)
     private String nickname;
 
     @Column(name = "image_url")
@@ -49,7 +49,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "introduction")
+    @Column(name = "introduction", length = 100)
     private String introduction;
 
     @Column(name = "age_range")
@@ -90,15 +90,26 @@ public class User {
         if (gender != null) {
             this.gender = gender;
         }
-        if (introduction != null && !introduction.isBlank()) {
-            this.introduction = introduction;
-        }
+
+        updateIntroduction(introduction);
+
         if (ageRange != null) {
             this.age = ageRange;
         }
         if (location != null && !location.isBlank()) {
             this.location = location;
         }
+    }
+
+    private void updateIntroduction(String introduction) {
+        if (introduction == null) {
+            return;
+        }
+        if (introduction.isBlank()) {
+            this.introduction = null;
+            return;
+        }
+        this.introduction = introduction;
     }
 
     public void upgradeToUser() {

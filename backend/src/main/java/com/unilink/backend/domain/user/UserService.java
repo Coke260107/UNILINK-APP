@@ -1,14 +1,11 @@
 package com.unilink.backend.domain.user;
 
-import com.unilink.backend.domain.user.dto.LoginRequestDto;
-import com.unilink.backend.domain.user.dto.LoginResponseDto;
-import com.unilink.backend.domain.user.dto.ProfileSaveRequestDTO;
-import com.unilink.backend.domain.user.dto.ProfileCreateResponseDTO;
+import com.unilink.backend.domain.user.dto.*;
 import com.unilink.backend.global.infra.KakaoApiClient;
 import com.unilink.backend.global.infra.dto.KakaoResponseDto;
 import com.unilink.backend.global.jwt.JwtTokenProvider;
 import feign.FeignException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,15 +47,15 @@ public class UserService {
     }
 
     @Transactional
-    public ProfileCreateResponseDTO createProfile(Long userId, ProfileSaveRequestDTO request) {
+    public ProfileCreateResponseDto createProfile(Long userId, ProfileSaveRequestDto request) {
         User guestUser = updateProfile(userId, request);
         guestUser.upgradeToUser();
         String userRoleToken = createJwtToken(guestUser);
 
-        return ProfileCreateResponseDTO.from(guestUser, userRoleToken);
+        return ProfileCreateResponseDto.from(guestUser, userRoleToken);
     }
 
-    private User updateProfile(Long userId, ProfileSaveRequestDTO request) {
+    private User updateProfile(Long userId, ProfileSaveRequestDto request) {
         User requestUser = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 유저는 존재하지 않습니다"));
         requestUser.updateProfile(request.getNickname(), null, request.getMbti(), request.getGender(),
@@ -67,4 +64,9 @@ public class UserService {
         return requestUser;
     }
 
+    @Transactional
+    public ProfileEditResponseDto editProfile(Long userId, ProfileSaveRequestDto request) {
+        User updateUser = updateProfile(userId, request);
+        return ProfileEditResponseDto.from(updateUser);
+    }
 }
