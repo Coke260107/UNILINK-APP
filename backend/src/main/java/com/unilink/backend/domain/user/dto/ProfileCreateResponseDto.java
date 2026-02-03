@@ -11,15 +11,15 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ProfileCreateResponseDto {
-    Long userId;
-    String nickname;
-    Gender gender;
-    Mbti mbti;
-    AgeRange age;
-    String introduction;
-    String location;
-    UserState userState;
-    String jwtTokenRoleUser;
+    private Long userId;
+    private String nickname;
+    private Gender gender;
+    private Mbti mbti;
+    private AgeRange age;
+    private String introduction;
+    private String location;
+    private UserState userState;
+    private String jwtTokenRoleUser;
 
     public static ProfileCreateResponseDto from(User user, String token) {
         return ProfileCreateResponseDto.builder()
