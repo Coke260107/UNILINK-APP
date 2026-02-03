@@ -2,6 +2,8 @@ package com.unilink.backend.domain.user;
 
 import com.unilink.backend.domain.user.dto.LoginRequestDto;
 import com.unilink.backend.domain.user.dto.LoginResponseDto;
+import com.unilink.backend.domain.user.dto.ProfileSaveRequestDTO;
+import com.unilink.backend.domain.user.dto.ProfileCreateResponseDTO;
 import com.unilink.backend.global.infra.KakaoApiClient;
 import com.unilink.backend.global.infra.dto.KakaoResponseDto;
 import com.unilink.backend.global.jwt.JwtTokenProvider;
@@ -45,6 +47,24 @@ public class UserService {
 
     private String createJwtToken(User user) {
         return jwtTokenProvider.createToken(user.getUserId(), user.getState());
+    }
+
+    @Transactional
+    public ProfileCreateResponseDTO createProfile(Long userId, ProfileSaveRequestDTO request) {
+        User guestUser = updateProfile(userId, request);
+        guestUser.upgradeToUser();
+        String userRoleToken = createJwtToken(guestUser);
+
+        return ProfileCreateResponseDTO.from(guestUser, userRoleToken);
+    }
+
+    private User updateProfile(Long userId, ProfileSaveRequestDTO request) {
+        User requestUser = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 유저는 존재하지 않습니다"));
+        requestUser.updateProfile(request.getNickname(), null, request.getMbti(), request.getGender(),
+                request.getIntroduction(), request.getAge(), request.getLocation());
+
+        return requestUser;
     }
 
 }
