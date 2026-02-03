@@ -78,13 +78,27 @@ public class User {
 
     public void updateProfile(String nickname, String profileImage, Mbti mbti, Gender gender,
                               String introduction, AgeRange ageRange, String location) {
-        this.nickname = nickname;
+        if (nickname != null && !nickname.isBlank()) {
+            this.nickname = nickname;
+        }
+        //profileImage는 일단 보류
         this.profileImage = profileImage;
-        this.mbti = mbti;
-        this.gender = gender;
-        this.introduction = introduction;
-        this.age = ageRange;
-        this.location = location;
+
+        if (mbti != null) {
+            this.mbti = mbti;
+        }
+        if (gender != null) {
+            this.gender = gender;
+        }
+        if (introduction != null && !introduction.isBlank()) {
+            this.introduction = introduction;
+        }
+        if (ageRange != null) {
+            this.age = ageRange;
+        }
+        if (location != null && !location.isBlank()) {
+            this.location = location;
+        }
     }
 
     public void upgradeToUser() {
