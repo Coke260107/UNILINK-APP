@@ -4,6 +4,7 @@ import com.unilink.backend.domain.user.dto.LoginRequestDto;
 import com.unilink.backend.domain.user.dto.LoginResponseDto;
 import com.unilink.backend.global.infra.KakaoApiClient;
 import com.unilink.backend.global.infra.dto.KakaoResponseDto;
+import com.unilink.backend.global.jwt.JwtTokenProvider;
 import feign.FeignException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class UserService {
 
     private final KakaoApiClient kakaoApiClient;
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
     public LoginResponseDto logInWithKakao(LoginRequestDto request) {
@@ -36,6 +38,13 @@ public class UserService {
                     return userRepository.save(newUser);
                 });
 
-        return LoginResponseDto.from(user);
+        String jwtToken = createJwtToken(user);
+
+        return LoginResponseDto.from(user, jwtToken);
     }
+
+    private String createJwtToken(User user) {
+        return jwtTokenProvider.createToken(user.getUserId(), user.getState());
+    }
+
 }
