@@ -7,6 +7,6 @@ export type RootStackParamList = {
 
 export type AuthStackParamList = {
   Auth: undefined;
-  Name: { accessToken: string };
-  UserMetaData0: { accessToken: string; nickname: string };
+  Name: undefined;
+  UserMetaData0: { nickname: string };
 };

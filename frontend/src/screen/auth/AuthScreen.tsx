@@ -2,49 +2,90 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { KakaoLoginToken, login } from '@react-native-kakao/user';
+import { login as kakaoLogin } from '@react-native-kakao/user';
+
+// Api
+import * as AuthApi from '../../api/authApi';
 
 // Component
 import KakaoButton from '../../component/button/AuthButton';
+import LoadingScreen from '../../component/loading/LoadingScreen';
 
 // Style
 import GlobalStyle, { Color } from '../../../globalStyle';
 
 // Type
+import { UserRoleType } from '../../type/userType';
 import { AuthStackParamList } from '../../navigation/type';
+
+// Utiltiy
+import { setJwtToken, getJwtToken } from '../../utility/keychain';
+import useAuth from '../../context/auth/useAuth';
+
 type Props = NativeStackScreenProps<AuthStackParamList, 'Auth'>;
 
 // ==================== Main ==================== //
 export default function AuthScreen({ navigation }: Props) {
-  const [token, setToken] = useState<string>(''); // = accessToken
   const [loading, setLoading] = useState<boolean>(false);
+  const { login } = useAuth();
 
   // Handle
   /**
    * 카카오톡 로그인 버튼 시 실행되는 handle
-   * @returns
    */
   const handleAuthForKakao = async () => {
     if (loading) return;
     setLoading(true);
 
     try {
-      let nextToken = token;
+      let token = await getJwtToken();
 
-      if (!nextToken) {
-        const { accessToken, idToken } = await login();
-        nextToken = accessToken;
-        setToken(nextToken);
+      if (!token) {
+        const { accessToken } = await kakaoLogin();
+        const registerResponse = await AuthApi.Register(accessToken);
+        token = registerResponse.jwtToken;
+        await setJwtToken(token);
       }
 
-      if (!nextToken) {
-        console.log('[log] nextToken is empty');
+      const { userRole } = await AuthApi.Auth(token);
+
+      console.log(`[handleAuthForKakao] userRole is ${userRole}`);
+
+      if (userRole === 'Guest') {
+        navigation.navigate('Name');
         return;
       }
 
-      navigation.navigate('Name', { accessToken: nextToken });
-    } catch (e) {
-      console.log(`Error: ${e}`);
+      await login();
+    } catch (error) {
+      // try {
+      //   const storedToken = await getJwtToken();
+
+      //   if (storedToken) {
+      //     const data = await AuthApi.Auth(storedToken);
+
+      //     if (data.userRole === 'Guest') {
+      //       navigation.navigate('Name');
+      //       return;
+      //     }
+
+      //     await login();
+      //   }
+
+      //   if (!storedToken) {
+      //     const { accessToken } = await kakaoLogin();
+
+      //     const data = await AuthApi.Register(accessToken);
+      //     await setJwtToken(data.jwtToken);
+
+      //     // Baaned 추가 예정
+      //     if (data.userRole === 'Guest') {
+      //       navigation.navigate('Name');
+      //       return;
+      //     }
+      //   }
+      // }
+      console.error(`[error] handleAuthForKakao : ${error}`);
     } finally {
       setLoading(false);
     }
@@ -63,6 +104,9 @@ export default function AuthScreen({ navigation }: Props) {
             <KakaoButton onPress={handleAuthForKakao} />
           </View>
         </View>
+
+        {/* Loading Screen */}
+        {loading && <LoadingScreen />}
       </SafeAreaView>
     </>
   );

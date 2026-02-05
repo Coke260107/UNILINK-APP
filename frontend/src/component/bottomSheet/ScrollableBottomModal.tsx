@@ -8,7 +8,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 import { Color } from '../../../globalStyle';
-import { MbtiItem, MbtiType } from '../../type/ProfileType';
+import { MbtiItem, MbtiType } from '../../type/profileType';
 
 type Props = {
   title: string;

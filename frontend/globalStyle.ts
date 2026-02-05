@@ -4,8 +4,9 @@ export const Color = {
   background: 'rgb(250, 250, 250)', // Neutral-50
   border: 'rgba(161, 161, 161, 0.4)', // Neutral-400/40
 
-  main: 'rgb(255, 100, 103)', // Red-400
-  main_disabled: 'rgba(255, 100, 103, 0.4)',
+  main: 'rgb(251, 44, 54)', // Red-500
+  main_disabled: 'rgb(255, 100, 103)', // Red-400
+  main_pressed: 'rgb(231, 0, 11)', // Red-600
 
   // Text
   text: 'black',

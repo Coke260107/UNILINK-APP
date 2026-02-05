@@ -17,6 +17,8 @@ import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Type
 import type { AuthStackParamList } from '../../navigation/type';
+import AniPressable from '../../component/button/AnimatedButton';
+import { CheckNickname } from '../../api/profileApi';
 type Props = NativeStackScreenProps<AuthStackParamList, 'Name'>;
 
 // ==================== Main Component ==================== //
@@ -24,39 +26,51 @@ export default function SetNicknameScreen({ navigation, route }: Props) {
   const [nickname, setNickname] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
-  const isValidNickname = nickname.trim().length > 0;
-  const isDisabled = loading || !isValidNickname;
+  const isNicknameTextInputDisabled = nickname.trim().length === 0 || loading;
 
   // ==================== Handle ==================== //
+
+  /**
+   * 기능: 뒤로가기 핸들
+   */
   const handleBackPressable = () => {
+    Keyboard.dismiss();
+
+    if (!navigation.canGoBack()) {
+      navigation.navigate('Auth');
+      return;
+    }
     navigation.goBack();
   };
 
-  const handleNextPressable = () => {
-    if (isDisabled) return;
+  /**
+   * 기능: 다음 버튼 핸들
+   */
+  const handleNextPressable = async () => {
+    if (isNicknameTextInputDisabled) return;
 
     setLoading(true);
-
     Keyboard.dismiss();
 
-    const delay = 500;
+    try {
+      const isDuplication = await CheckNickname(nickname);
 
-    setTimeout(() => {
-      const { accessToken } = route.params;
+      if (isDuplication) {
+        console.warn(`[handleNextPressable] ${nickname} is Duplication`);
+        return;
+      }
 
-      navigation.navigate('UserMetaData0', {
-        accessToken,
-        nickname: nickname.trim(),
-      });
-
+      navigation.navigate('UserMetaData0', { nickname: nickname });
+    } catch (e) {
+    } finally {
       setLoading(false);
-    }, delay);
+    }
   };
 
   return (
     <SafeAreaView style={GlobalStyle.safeAreaView}>
       {/* Header */}
-      <View style={style.header}>
+      <View style={styles.header}>
         <Pressable onPress={handleBackPressable}>
           <FontAwesome6 name="angle-left" iconStyle="solid" size={20} />
         </Pressable>
@@ -64,41 +78,31 @@ export default function SetNicknameScreen({ navigation, route }: Props) {
 
       {/* Main Content */}
       <KeyboardAwareScrollView
-        style={[style.scroll]}
-        contentContainerStyle={[style.scroll_content]}
+        style={[styles.scroll]}
+        contentContainerStyle={[styles.scroll_content]}
         keyboardShouldPersistTaps="handled"
       >
-        <View style={[style.root_container]}>
+        <View style={[styles.root_container]}>
           <View>
-            <Text style={style.title}>이름을 가르쳐주세요</Text>
+            <Text style={styles.title}>이름을 가르쳐주세요</Text>
             <TextInput
+              editable={!loading}
               placeholder="이름"
               value={nickname}
               onChangeText={val => setNickname(val)}
               maxLength={20}
               autoFocus={true}
-              style={style.nickName_textInput}
+              style={styles.nickName_textInput}
             />
           </View>
 
           <View>
-            <Pressable
-              onPress={handleNextPressable}
-              disabled={isDisabled}
-              style={[
-                style.next_pressable,
-                isDisabled && style.next_pressable_disabled,
-              ]}
-            >
-              <Text
-                style={[
-                  style.next_text,
-                  isDisabled && style.next_text_disabled,
-                ]}
-              >
-                다음
-              </Text>
-            </Pressable>
+            <AniPressable
+              label="다음"
+              onPress={() => handleNextPressable()}
+              disabled={isNicknameTextInputDisabled}
+              loading={loading}
+            />
           </View>
         </View>
       </KeyboardAwareScrollView>
@@ -106,7 +110,8 @@ export default function SetNicknameScreen({ navigation, route }: Props) {
   );
 }
 
-const style = StyleSheet.create({
+// ==================== Style ====================
+const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
     paddingHorizontal: 12,
@@ -141,18 +146,6 @@ const style = StyleSheet.create({
     borderColor: Color.border,
     fontSize: 18,
     marginTop: 40,
-  },
-
-  next_pressable: {
-    height: 52, // 높이를 조금 키우면 터치가 편합니다
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Color.main,
-    borderRadius: 16,
-  },
-
-  next_pressable_disabled: {
-    backgroundColor: Color.main_disabled,
   },
 
   next_text: {

@@ -36,7 +36,8 @@ import {
   AgeType,
   AGE_LABEL,
   AGE_OPTION,
-} from '../../type/ProfileType';
+} from '../../type/profileType';
+import AniPressable from '../../component/button/AnimatedButton';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'UserMetaData0'>;
 
@@ -44,7 +45,7 @@ type Props = NativeStackScreenProps<AuthStackParamList, 'UserMetaData0'>;
 
 // Main Component
 export default function SetUserMetaData0Screen({ route, navigation }: Props) {
-  const { accessToken, nickname } = route.params;
+  const { nickname } = route.params;
   const insets = useSafeAreaInsets();
 
   const genderBottomModalRef = useRef<BottomSheetModal>(null);
@@ -193,9 +194,7 @@ export default function SetUserMetaData0Screen({ route, navigation }: Props) {
               </View>
             </View>
             <View>
-              <Pressable style={[style.next_pressable]}>
-                <Text style={[style.next_text]}>다음</Text>
-              </Pressable>
+              <AniPressable label="다음" onPress={() => null} />
             </View>
           </View>
         </KeyboardAwareScrollView>
