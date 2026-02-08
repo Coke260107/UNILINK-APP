@@ -129,7 +129,7 @@ export default function HomeScreen() {
 
           {/* Calendar */}
           <View style={styles.card}>
-            <View style={[styles.header_container, { marginBottom: 4 }]}>
+            <View style={[styles.header_container, { marginBottom: 4, marginHorizontal:  12, marginTop:4}]}>
               <Text style={styles.card_title}>나의 일정</Text>
               <FontAwesome6
                 name="angle-right"
