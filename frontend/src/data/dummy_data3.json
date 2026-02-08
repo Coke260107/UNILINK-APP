@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1,
+    "title": "자료구조 스터디",
+    "lastMessage": "방금 막 정리 끝! 스택/큐 예제 코드도 같이 올려뒀어",
+    "lastMessageAt": "2026-01-22T20:59:10",
+    "lastReadAt": "2026-01-22T20:59:30"
+  },
+  {
+    "id": 2,
+    "title": "React Native 팀채팅",
+    "lastMessage": "FlatList로 바꾸면 렌더링 최적화되고 스크롤도 훨씬 부드러워질 듯",
+    "lastMessageAt": "2026-01-22T20:52:00",
+    "lastReadAt": "2026-01-22T20:55:10"
+  },
+
+  
+  {
+    "id": 3,
+    "title": "게임 같이할 사람",
+    "lastMessage": "오늘 밤 11시쯤 랭크 돌릴 사람? 음성 가능하면 더 좋음!",
+    "lastMessageAt": "2026-01-22T21:30:00",
+    "lastReadAt": "2026-01-22T20:05:00"
+  },
+
+  {
+    "id": 4,
+    "title": "점심 뭐먹지",
+    "lastMessage": "학식 vs 제육덮밥 고민중… 너는 뭐 먹을 거야?",
+    "lastMessageAt": "2026-01-22T12:05:00",
+    "lastReadAt": "2026-01-22T12:20:00"
+  },
+
+  
+  {
+    "id": 5,
+    "title": "운동 메이트",
+    "lastMessage": "오늘 하체 가자! 스쿼트 5x5 하고 레그프레스까지 ㄱㄱ",
+    "lastMessageAt": "2026-01-22T19:10:00",
+    "lastReadAt": "2026-01-21T18:55:00"
+  },
+
+  {
+    "id": 6,
+    "title": "캡스톤 디자인",
+    "lastMessage": "API 명세서에 /chat/my 추가했고 응답 필드도 lastMessageAt로 통일했어",
+    "lastMessageAt": "2026-01-20T16:10:00",
+    "lastReadAt": "2026-01-20T16:45:00"
+  },
+
+  
+  {
+    "id": 7,
+    "title": "알고리즘 스터디",
+    "lastMessage": "다익스트라/벨만포드 비교 정리해봤는데, 시간복잡도 표도 같이 넣었어",
+    "lastMessageAt": "2026-01-22T08:00:00",
+    "lastReadAt": "2026-01-18T21:07:00"
+  },
+
+  {
+    "id": 8,
+    "title": "기말고사 대비",
+    "lastMessage": "족보 공유 가능? 특히 운영체제랑 네트워크 파트 있으면 최고",
+    "lastMessageAt": "2026-01-16T19:40:00",
+    "lastReadAt": "2026-01-16T20:05:00"
+  },
+
+  {
+    "id": 9,
+    "title": "백엔드 회의",
+    "lastMessage": "JWT payload에 userId만 넣고, /chat/my는 토큰 기반으로 조회하는 걸로 확정",
+    "lastMessageAt": "2026-01-14T14:30:00",
+    "lastReadAt": "2026-01-14T14:50:00"
+  },
+
+  
+  {
+    "id": 10,
+    "title": "프론트엔드 회의",
+    "lastMessage": "디자인은 카드형으로 가고, 시간은 오른쪽 위로 올리면 깔끔할 듯",
+    "lastMessageAt": "2026-01-22T09:10:00",
+    "lastReadAt": "2026-01-10T13:35:00"
+  },
+
+  {
+    "id": 11,
+    "title": "과제 질문방",
+    "lastMessage": "이 부분 이해 안 됨… let-in 스코프랑 클로저 캡처가 헷갈려",
+    "lastMessageAt": "2025-12-28T23:00:00",
+    "lastReadAt": "2025-12-28T23:15:00"
+  },
+
+  {
+    "id": 12,
+    "title": "동아리 공지",
+    "lastMessage": "이번 주 모임 취소! 다음 주에 장소 다시 공지할게요",
+    "lastMessageAt": "2025-11-12T18:00:00",
+    "lastReadAt": "2025-11-12T18:03:00"
+  },
+
+  
+  {
+    "id": 13,
+    "title": "스터디 일정 조율",
+    "lastMessage": "금요일 7시 괜찮아? 안 되면 토요일 오후도 가능!",
+    "lastMessageAt": "2026-01-21T20:30:00",
+    "lastReadAt": "2025-10-03T21:00:00"
+  },
+
+  {
+    "id": 14,
+    "title": "취업 정보 공유",
+    "lastMessage": "이번 공고 괜찮아 보임. 자소서 항목이 깔끔해서 지원하기 쉬울 듯",
+    "lastMessageAt": "2025-08-19T15:10:00",
+    "lastReadAt": "2025-08-19T15:40:00"
+  },
+
+  {
+    "id": 15,
+    "title": "프로젝트 잡담",
+    "lastMessage": "이 버그 진짜 레전드다… 원인이 setState 비동기라니 어이가 없음 ㅋㅋ",
+    "lastMessageAt": "2025-06-08T22:45:00",
+    "lastReadAt": "2025-06-08T22:55:00"
+  },
+
+  {
+    "id": 16,
+    "title": "아침 러닝",
+    "lastMessage": "내일 7시에 출발! 비 오면 30분 미루고, 안 오면 그대로 진행",
+    "lastMessageAt": "2025-04-21T21:10:00",
+    "lastReadAt": "2025-04-21T21:25:00"
+  },
+
+  {
+    "id": 17,
+    "title": "밥약 잡기",
+    "lastMessage": "내일 점심 가능? 12시 반쯤 학교 앞에서 만나자",
+    "lastMessageAt": "2025-02-07T12:00:00",
+    "lastReadAt": "2025-02-07T12:08:00"
+  },
+
+  {
+    "id": 18,
+    "title": "게임 공략 공유",
+    "lastMessage": "이 루트가 제일 빠름. 초반엔 자원 모으고 10분쯤에 보스 트라이 추천",
+    "lastMessageAt": "2024-11-07T01:30:00",
+    "lastReadAt": "2024-11-07T01:55:00"
+  },
+
+  {
+    "id": 19,
+    "title": "스터디 노트",
+    "lastMessage": "PDF 올려둘게요. 챕터별로 요약했고 예제 문제 풀이도 같이 첨부했음",
+    "lastMessageAt": "2024-06-06T19:00:00",
+    "lastReadAt": "2024-06-06T19:20:00"
+  },
+
+  {
+    "id": 20,
+    "title": "자유 잡담방",
+    "lastMessage": "ㅋㅋㅋㅋ 이거 지금 봤는데 너무 웃기다",
+    "lastMessageAt": "2024-01-25T02:15:00",
+    "lastReadAt": "2024-01-25T02:40:00"
+  }
+]
