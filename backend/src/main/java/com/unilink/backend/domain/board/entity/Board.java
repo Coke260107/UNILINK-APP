@@ -1,5 +1,6 @@
-package com.unilink.backend.domain.board;
+package com.unilink.backend.domain.board.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -21,6 +23,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.unilink.backend.domain.board.enums.Category;
 import com.unilink.backend.domain.user.User;
@@ -57,6 +61,10 @@ public class Board {
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
+    /* 좋아요 리스트 */
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BoardLike> likes = new ArrayList<>();
+
     /* 좋아요 개수 */
     @Column(name = "like_count", nullable = false)
     private int likeCount = 0;
@@ -74,6 +82,10 @@ public class Board {
     private LocalDateTime updatedAt;
 
     /* ==================== Domain Methods ==================== */
+    /**
+     * 게시물 카테고리 변경 함수
+     * @param category - 카테고리 
+     */
     public void changeCategory(Category category) {
         if (category == null) {
             throw new IllegalArgumentException("category is required");
@@ -81,6 +93,10 @@ public class Board {
         this.category = category;
     }
 
+    /**
+     * 게시물 제목 변경 함수
+     * @param title - 변경된 내용
+     */
     public void changeTitle(String title) {
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("title is required");
@@ -91,6 +107,10 @@ public class Board {
         this.title = title;
     }
 
+    /**
+     * 게시물 내용 변경 함수
+     * @param content - 변경된 내용
+     */
     public void changeContent(String content) {
         if (content == null || content.isBlank()) {
             throw new IllegalArgumentException("content is");
@@ -100,6 +120,22 @@ public class Board {
         }
 
         this.content = content;
+    }
+
+    /**
+     * 좋아요 증가
+     */
+    public void increaseLikeCount() {
+        this.likeCount++;
+    }
+
+    /**
+     * 좋아요 감소
+     */
+    public void decreaseLikeCount() {
+        if (this.likeCount > 0 ) {
+            this.likeCount--;
+        }
     }
 
     /* ==================== Builder ==================== */

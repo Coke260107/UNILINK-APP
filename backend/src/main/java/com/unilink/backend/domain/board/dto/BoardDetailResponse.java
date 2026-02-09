@@ -2,7 +2,7 @@ package com.unilink.backend.domain.board.dto;
 
 import java.time.LocalDateTime;
 
-import com.unilink.backend.domain.board.Board;
+import com.unilink.backend.domain.board.entity.Board;
 import com.unilink.backend.domain.board.enums.Category;
 
 public record BoardDetailResponse(

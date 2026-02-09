@@ -1,4 +1,4 @@
-package com.unilink.backend.domain.board;
+package com.unilink.backend.domain.board.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +10,9 @@ import com.unilink.backend.domain.board.dto.BoardCreateRequest;
 import com.unilink.backend.domain.board.dto.BoardDetailResponse;
 import com.unilink.backend.domain.board.dto.BoardListItemResponse;
 import com.unilink.backend.domain.board.dto.BoardUpdateRequest;
+import com.unilink.backend.domain.board.entity.Board;
 import com.unilink.backend.domain.board.enums.Category;
+import com.unilink.backend.domain.board.repository.BoardRepository;
 import com.unilink.backend.domain.user.User;
 import com.unilink.backend.domain.user.UserRepository;
 

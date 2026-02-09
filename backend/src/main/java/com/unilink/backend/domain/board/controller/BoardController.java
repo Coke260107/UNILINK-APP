@@ -1,30 +1,23 @@
-package com.unilink.backend.domain.board;
+package com.unilink.backend.domain.board.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.unilink.backend.domain.board.dto.BoardCreateRequest;
 import com.unilink.backend.domain.board.dto.BoardDetailResponse;
 import com.unilink.backend.domain.board.dto.BoardListItemResponse;
 import com.unilink.backend.domain.board.dto.BoardUpdateRequest;
 import com.unilink.backend.domain.board.enums.Category;
+import com.unilink.backend.domain.board.service.BoardService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/boards")
+@RequestMapping("/api/boards")
 public class BoardController {
     private final BoardService boardService;
 
