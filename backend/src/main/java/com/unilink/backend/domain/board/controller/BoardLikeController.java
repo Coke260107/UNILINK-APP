@@ -25,7 +25,7 @@ public class BoardLikeController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/api/{boardId/likes/count")
+    @GetMapping("/api/{boardId}/likes/count")
     public ResponseEntity<Long> getLikeCount(@PathVariable Long boardId) {
         long count = boardLikeService.getLikeCount(boardId);
         return ResponseEntity.ok(count);

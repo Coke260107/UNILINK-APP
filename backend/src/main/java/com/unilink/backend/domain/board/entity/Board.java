@@ -1,21 +1,6 @@
 package com.unilink.backend.domain.board.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -46,14 +31,13 @@ public class Board {
     private Category category;
 
     /* 게시물 제목 (최대 50자) */
+    @Column(name = "title", nullable = false, length = 50, columnDefinition = "TEXT")
     @Size(max = 50)
-    @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    /* 게시물 내용 */
-    @Lob
+    /* 게시물 내용 (최대 2000자) */
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     @Size(max = 2000)   // 2000자
-    @Column(name = "content", nullable = false)
     private String content;
 
     /* 게시물 작성자 */
@@ -72,6 +56,9 @@ public class Board {
     /* 연결된 모임 */ // Meeting 구현 예정
     // @Column(name = "meeting")
     // private Meeting meeting;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BoardComment> comments = new ArrayList<>();
 
     /* 게시물 생성 시각 */
     @Column(name = "created_at",updatable = false, nullable = false)
@@ -138,7 +125,7 @@ public class Board {
         }
     }
 
-    /* ==================== Builder ==================== */
+    /* ==================== Constructors ==================== */
     @Builder
     private Board(Category category, String title, String content, User author) {
         if (category == null) 
