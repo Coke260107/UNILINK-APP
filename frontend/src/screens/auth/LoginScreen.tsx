@@ -1,35 +1,43 @@
 // src/screens/auth/LoginScreen.tsx
 
-import { useState } from "react"
-import { SafeAreaView } from "react-native-safe-area-context";
-import globalStyles from "../../utils/globalStyle";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import KakaoLoginButton from "../../components/buttons/KakaoLoginButton";
+import { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import globalStyles from '../../utils/globalStyle';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import KakaoLoginButton from '../../components/buttons/KakaoLoginButton';
+import { login } from '@react-native-kakao/user';
 
 // ==================== Main ==================== //
 const LoginScreen = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
+  // Handle
+  const handleLoginWithKakao = async () => {
+    try {
+      const data = await login();
+      console.log(data);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <SafeAreaView style={[globalStyles.safeAreaView]}>
         <View style={[styles.root_container]}>
-
           <View style={[styles.top_container]}>
             <Text style={[styles.title]}>UNILINK</Text>
             <Text style={[styles.sub_title]}>모임의 시작, UNILINK</Text>
           </View>
 
           <View style={[styles.bottom_container]}>
-            <KakaoLoginButton onPress={() => null}/>
+            <KakaoLoginButton onPress={handleLoginWithKakao} />
           </View>
         </View>
       </SafeAreaView>
     </>
-  )
-}
-
-
+  );
+};
 
 // ==================== Style ==================== //
 const styles = StyleSheet.create({
@@ -58,8 +66,8 @@ const styles = StyleSheet.create({
 
   bottom_container: {
     justifyContent: 'center',
-  }
-})
+  },
+});
 
 // ==================== Export ==================== //
 export default LoginScreen;

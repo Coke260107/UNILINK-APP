@@ -1,17 +1,41 @@
 // src/components/buttons/KakaoLoginButton.tsx
 
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import Svg, { Path } from "react-native-svg";
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+import Svg, { Path } from 'react-native-svg';
 
 // Type
 type Props = {
   onPress: () => void;
-}
+};
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 // ==================== Main ==================== //
 const KakaoLoginButton = ({ onPress }: Props) => {
+  const isPressed = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: withSpring(isPressed.value === 1 ? 0.975 : 1) }],
+    };
+  });
+
   return (
-    <Pressable style={[styles.pressable]}>
+    <AnimatedPressable
+      onPress={onPress}
+      onPressIn={() => {
+        isPressed.value = 1;
+      }}
+      onPressOut={() => {
+        isPressed.value = 0;
+      }}
+      style={[styles.pressable, animatedStyle]}
+    >
       <View style={[styles.icon_container]}>
         <Svg width={24} height={24} viewBox="0 0 24 24">
           <Path
@@ -22,22 +46,20 @@ const KakaoLoginButton = ({ onPress }: Props) => {
       </View>
 
       <Text style={[styles.pressable_text]}>카카오로 시작하기</Text>
-    </Pressable>
-  )
-}
-
-
+    </AnimatedPressable>
+  );
+};
 
 // ==================== Style ==================== //
 const styles = StyleSheet.create({
   pressable: {
     flexDirection: 'row',
-    alignItems:'center',
+    alignItems: 'center',
 
     height: 48,
 
     paddingHorizontal: 12,
-    
+
     backgroundColor: '#FEE500',
 
     borderRadius: 12,
@@ -49,11 +71,11 @@ const styles = StyleSheet.create({
   },
 
   pressable_text: {
-    flex: 1, 
+    flex: 1,
     fontSize: 16,
     textAlign: 'center',
     color: 'rgba(0, 0, 0, 0.85)',
-  }
+  },
 });
 
 // ==================== Export ==================== //
