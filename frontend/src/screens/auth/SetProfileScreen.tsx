@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useRef, useState } from 'react';
 import {
   Keyboard,
   Pressable,
@@ -8,10 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import BottomSheet, { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
@@ -31,13 +28,41 @@ import { AuthStackParamList } from '../../types/navigationType';
 import AnimatedPressable from '../../components/buttons/AnimatedPressable';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'SetProfile'>;
+type OpenModalPressableProps = {
+  label: string;
+  selectedValueLabel: string;
+  onPress: () => void;
+};
 
 // Util
 import PALETTE from '../../utils/color';
+import DefaultHeader from '../../components/headers/DefaultHeader';
+import AnimatedTextInput from '../../components/textInputs/AnimatedTextInput';
 
-// ============================================================
+/* ==================== Inner Component ==================== */
+const OpenModalPressable = (props: OpenModalPressableProps) => {
+  return (
+    <View style={{ flex: 1 }}>
+      <Text>{props.label}</Text>
+      <Pressable
+        style={{
+          height: 52,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingHorizontal: 4,
+          borderBottomWidth: 1.5,
+          borderColor: PALETTE.border,
+        }}
+      >
+        <Text style={{ fontSize: 18 }}>{props.selectedValueLabel}</Text>
+        <FontAwesome6 name="chevron-down" iconStyle="solid" size={16} />
+      </Pressable>
+    </View>
+  );
+};
 
-// Main Component
+// ==================== Main ==================== //
 const SetProfileScreen = ({ route, navigation }: Props) => {
   const { nickname } = route.params;
 
@@ -48,198 +73,94 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
   const [gender, setGender] = useState<UserType.GenderType>('PRIVATE');
   const [mbti, setMbti] = useState<UserType.MbtiType>('PRIVATE');
   const [age, setAge] = useState<UserType.AgeType>('PRIVATE');
+  const [introduction, setIntroducation] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
-  // #region Handle
-  /**
-   * BottomModal active handle
-   *
-   * @param ref
-   */
-  const handlePresentBottomModal = (
-    ref: React.RefObject<BottomSheetModal | null>,
-  ) => {
-    Keyboard.dismiss();
-
-    ref.current?.present();
-  };
-
-  /**
-   * BottomModal dismiss handle
-   *
-   * @param ref
-   * @param selected
-   * @param setter
-   */
-  const handleDismissBottomModal = <T extends string>(
-    ref: React.RefObject<BottomSheetModal | null>,
-    selected: T,
-    setter: (value: T) => void,
-  ) => {
-    setter(selected);
-
-    ref.current?.dismiss();
-  };
-
-  /**
-   * Go back Screen Handle
-   */
-  const handleBackPressable = () => {
-    navigation.goBack();
-  };
-
-  const handleCreateProfile = async () => {
-    try {
-      if (loading) return;
-    } catch (error: any) {
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // #endregion Handle
+  // Handle
+  const handleOpenModal = useCallback(
+    (ref: RefObject<BottomSheetModal | null>) => {
+      ref.current?.present();
+    },
+    [],
+  );
 
   return (
     <>
       <SafeAreaView style={globalStyles.safeAreaView}>
-        {/* Header */}
-        <View style={[style.header]}>
-          <Pressable onPress={handleBackPressable}>
-            <FontAwesome6 name="angle-left" iconStyle="solid" size={20} />
-          </Pressable>
-        </View>
+        <DefaultHeader />
 
         {/* Main */}
         <KeyboardAwareScrollView
-          style={[style.scroll]}
-          contentContainerStyle={[style.scroll_content]}
+          style={[styles.scroll]}
+          contentContainerStyle={[styles.scroll_content]}
+          showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           bottomOffset={999}
         >
-          <View style={[style.root_container]}>
+          {/* Top */}
+          <View style={[styles.root_container]}>
             <View>
-              <Text style={style.title}>프로필 정보를 입력해 주세요</Text>
+              {/* Title */}
+              <Text style={styles.title}>프로필 정보를 입력해 주세요</Text>
 
-              {/* 프로필 이미지 */}
-              <View style={style.profile_container}>
-                <View style={style.profile_background}>
+              {/* Profile */}
+              <View style={styles.profile_container}>
+                <View style={styles.profile_background}>
                   <FontAwesome6 name="user" iconStyle="solid" size={60} />
                 </View>
 
-                <Text style={style.nickname}>{nickname}</Text>
+                <Text style={styles.nickname}>{nickname}</Text>
               </View>
 
-              {/* 성별 및 MBTI */}
-              <View style={{ flexDirection: 'row', gap: 24, marginBottom: 24 }}>
-                {/* 성별 */}
-                <View style={{ flex: 1 }}>
-                  <Text style={style.label}>성별</Text>
-                  <Pressable
-                    style={[style.select_pressable]}
-                    onPress={() =>
-                      handlePresentBottomModal(genderBottomModalRef)
-                    }
-                  >
-                    <Text style={style.selected_text}>
-                      {UserType.GENDER_LABEL[gender]}
-                    </Text>
-                    <FontAwesome6
-                      name="angle-down"
-                      iconStyle="solid"
-                      size={18}
-                      color={PALETTE.border}
-                    />
-                  </Pressable>
-                </View>
-
-                {/* MBTI */}
-                <View style={{ flex: 1 }}>
-                  <Text style={style.label}>MBTI</Text>
-                  <Pressable
-                    style={style.select_pressable}
-                    onPress={() => handlePresentBottomModal(mbtiBottomModalRef)}
-                  >
-                    <Text style={style.selected_text}>
-                      {UserType.MBTI_LABEL[mbti]}
-                    </Text>
-
-                    <FontAwesome6
-                      name="angle-down"
-                      iconStyle="solid"
-                      size={18}
-                      color={PALETTE.border}
-                    />
-                  </Pressable>
-                </View>
+              {/* Gender & Mbti */}
+              <View style={[styles.gender_mbti_container]}>
+                <OpenModalPressable
+                  label="성별"
+                  onPress={() => null}
+                  selectedValueLabel={UserType.GENDER_LABEL[gender]}
+                />
+                <OpenModalPressable
+                  label="MBTI"
+                  onPress={() => null}
+                  selectedValueLabel={UserType.MBTI_LABEL[mbti]}
+                />
               </View>
 
               {/* Age */}
-              <View style={{ marginBottom: 24 }}>
-                <Text style={style.label}>나이</Text>
-                <Pressable
-                  style={style.select_pressable}
-                  onPress={() => handlePresentBottomModal(ageBottomModalRef)}
-                >
-                  <Text style={style.selected_text}>
-                    {UserType.AGE_LABEL[age]}
-                  </Text>
-
-                  <FontAwesome6
-                    name="angle-down"
-                    iconStyle="solid"
-                    size={18}
-                    color={PALETTE.border}
-                  />
-                </Pressable>
+              <View style={[styles.age_container]}>
+                <OpenModalPressable
+                  label="연령대"
+                  onPress={() => null}
+                  selectedValueLabel={UserType.AGE_LABEL[age]}
+                />
               </View>
 
               {/* Introduce */}
-              <View>
-                <Text style={[style.label, { marginBottom: 12 }]}>소개글</Text>
-                <TextInput
-                  placeholder="간단한 소개글을 작성해 주세요. (최대 100자)"
-                  style={{
-                    padding: 12,
-                    height: 100,
-                    borderColor: PALETTE.border,
-                    borderWidth: 1,
-                    borderRadius: 12,
-
-                    fontSize: 16,
-                  }}
+              <View style={[styles.introduction_container]}>
+                <Text style={styles.label}>소개글</Text>
+                <AnimatedTextInput
+                  value={introduction}
+                  onChangeText={val => setIntroducation(val)}
+                  placeholder="간단한 소개글을 적어보세요 (최대 100자)"
                   multiline={true}
-                  textAlignVertical="top"
-                  maxLength={100}
+                  style={[styles.introduction_textInput]}
                 />
               </View>
             </View>
-            <View>
-              <AnimatedPressable
-                label="다음"
-                onPress={() => null}
-                loading={loading}
-              />
-            </View>
+
+            {/* Bottom */}
+            <AnimatedPressable label="다음" onPress={() => null} />
           </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>
 
       {/* ========== Bottom Sheet ========== */}
-      {/* Gender */}
-      {/* <SelectBottomModal<UserType.GenderType>
-        ref={genderBottomModalRef}
-        title="성별을 선택해 주세요"
-        option={UserType.GENDER_OPTION}
-        selected={gender}
-        onSelected={value =>
-          handleDismissBottomModal(genderBottomModalRef, value, setGender)
-        }
-      /> */}
 
+      {/* Gender */}
       <SelectBottomSheetModal<UserType.GenderType>
         ref={genderBottomModalRef}
         title="성별을 선택해 주세요"
-        option={UserType.GENDER_OPTION}
+        options={UserType.GENDER_OPTION}
         selected={gender}
         onSelected={() => null}
       />
@@ -248,46 +169,32 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
       <SelectBottomSheetModal<UserType.MbtiType>
         ref={mbtiBottomModalRef}
         title="MBTI를 선택해 주세요"
-        option={UserType.MBTI_OPTION}
+        options={UserType.MBTI_OPTION}
         selected={mbti}
         onSelected={() => null}
         colNum={2}
       />
 
       {/* Age */}
-      {/* <SelectBottomModal<UserType.AgeType>
+      <SelectBottomSheetModal<UserType.AgeType>
         ref={ageBottomModalRef}
         title="나이대를 선택해 주세요"
-        option={UserType.AGE_OPTION}
+        options={UserType.AGE_OPTION}
         selected={age}
-        onSelected={value =>
-          handleDismissBottomModal(ageBottomModalRef, value, setAge)
-        }
-      /> */}
+        onSelected={() => null}
+      />
     </>
   );
 };
 
-// Style
-const style = StyleSheet.create({
-  // ==================== Header ====================
-  header: {
-    justifyContent: 'center',
-    paddingHorizontal: 12,
-
-    height: 56,
-
-    backgroundColor: PALETTE.background,
-  },
-
+// ==================== Style ==================== //
+const styles = StyleSheet.create({
   scroll: {
     flex: 1,
   },
 
   scroll_content: {
     flexGrow: 1,
-
-    paddingHorizontal: 24,
   },
 
   root_container: {
@@ -305,12 +212,24 @@ const style = StyleSheet.create({
     marginBottom: 40,
   },
 
-  // ==================== Profile ====================
   profile_container: {
     justifyContent: 'center',
     alignItems: 'center',
   },
 
+  gender_mbti_container: {
+    flexDirection: 'row',
+
+    marginBottom: 24,
+
+    gap: 16,
+  },
+
+  age_container: {
+    marginBottom: 24,
+  },
+
+  // Profile
   profile_background: {
     aspectRatio: 1,
 
@@ -331,45 +250,24 @@ const style = StyleSheet.create({
     fontWeight: '600',
   },
 
-  // ==================== Select ====================
+  // Introduce
+  introduction_container: {
+    marginBottom: 48,
+  },
+
   label: {
+    marginBottom: 4,
+
     fontSize: 14,
     color: PALETTE.text,
   },
 
-  select_pressable: {
-    height: 52,
+  introduction_textInput: {
+    height: 100,
 
-    flexDirection: 'row',
-
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-    borderBottomWidth: 1,
-    borderColor: PALETTE.border,
-  },
-
-  selected_text: {
-    fontSize: 18,
-  },
-
-  // ==================== Footer ====================
-  next_pressable: {
-    height: 44,
-
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    backgroundColor: PALETTE.main,
-
-    borderRadius: 16,
-  },
-
-  next_text: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: 'white',
+    borderRadius: 12,
   },
 });
 
+/* ==================== Export ==================== */
 export default SetProfileScreen;

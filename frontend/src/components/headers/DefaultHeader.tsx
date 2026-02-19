@@ -1,6 +1,7 @@
 // src/components/headers/DefaultHeader.tsx
 
 import { Pressable, StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 // Icon
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
@@ -10,12 +11,17 @@ import PALETTE from '../../utils/color';
 
 /* ==================== Main ==================== */
 const DefaultHeader = () => {
+  const navigation = useNavigation();
   const checkNicknameDuplication = () => {};
+
+  const handleBack = () => {
+    if (navigation.canGoBack()) navigation.goBack();
+  };
 
   return (
     <>
       <View style={[styles.container]}>
-        <Pressable>
+        <Pressable onPress={handleBack}>
           <FontAwesome6
             name="angle-left"
             iconStyle="solid"
