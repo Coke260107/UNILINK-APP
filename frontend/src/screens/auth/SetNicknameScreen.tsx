@@ -2,36 +2,71 @@
 
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 // Api
-import { CheckNicknameDuplication } from '../../api/auth/authApi';
+import { CheckNicknameDuplication } from '../../api/user/userApi';
+
+// Context
 
 // Component
 import DefaultHeader from '../../components/headers/DefaultHeader';
-
-// Type
-import { RegistrationStackParamList } from '../../types/navigationType';
-
-// Style
-import globalStyles from '../../utils/globalStyle';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
 import AnimatedPressable from '../../components/buttons/AnimatedPressable';
 import AnimatedTextInput from '../../components/textInputs/AnimatedTextInput';
 
-type Props = NativeStackScreenProps<RegistrationStackParamList, 'SetNickname'>;
+// Type
+import { AuthStackParamList } from '../../types/navigationType';
+import { User, UserMetaData } from '../../types/userType';
+
+// Style
+import globalStyles from '../../utils/globalStyle';
+import {
+  Alert,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import { useAuth } from '../../contexts/AuthContext';
 
 /* ==================== Main ==================== */
-const SetNicknameScreen = ({ navigation }: Props) => {
+const SetNicknameScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+  const { user, updateUserMetaData } = useAuth();
+
+  // useState
   const [nickname, setNickname] = useState<string>('');
   const [nicknameValidation, setNicknameValidation] = useState<boolean | null>(
     null,
   );
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleConfirm = () => {
+  const handlePressNext = () => {
+    if (loading) return;
+
     if (!nickname.trim()) return;
-    navigation.navigate('SetProfile', { nickname: nickname.trim() });
+
+    Keyboard.dismiss();
+
+    const userMetaData: UserMetaData = {
+      nickname: nickname,
+    };
+
+    try {
+      updateUserMetaData(userMetaData);
+      navigation.navigate('SetUserMetaData');
+    } catch (error: any) {
+      Alert.alert(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCheckNickname = async () => {
@@ -52,6 +87,7 @@ const SetNicknameScreen = ({ navigation }: Props) => {
           <AnimatedTextInput
             value={nickname}
             onChangeText={val => setNickname(val)}
+            maxLength={20}
             onBlur={handleCheckNickname}
             placeholder="이름"
             style={styles.textInput}
@@ -62,9 +98,10 @@ const SetNicknameScreen = ({ navigation }: Props) => {
         </View>
         <View>
           <AnimatedPressable
-            onPress={handleConfirm}
-            label="확인"
-            disabled={!nicknameValidation}
+            onPress={() => handlePressNext()}
+            label="다음"
+            disabled={!nicknameValidation || loading}
+            loading={loading}
           />
         </View>
       </KeyboardAvoidingView>

@@ -1,12 +1,20 @@
 // src/contexts/AuthContext.tsx
 
-import { createContext, ReactNode, useContext, useRef, useState } from 'react';
-import { UserState } from '../types/userType';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
+import { User, UserMetaData, UserState } from '../types/userType';
 
 // Type
 type AuthContextType = {
-  userToken: string | null;
-  userState: UserState | null;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  updateUserMetaData: (newDate: Partial<UserMetaData>) => void;
   login: (token: string, state: UserState) => void;
   logout: () => void;
 };
@@ -20,26 +28,45 @@ type AuthProviderProps = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [userToken, setUserToken] = useState<string | null>(null);
-  const [userState, setUserState] = useState<UserState | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const pendingTokenRef = useRef<string | null>(null);
 
-  const login = (token: string, state: UserState) => {
-    setUserToken(token);
-    setUserState(state);
-  };
+  const updateUserMetaData = useCallback(
+    (newData: Partial<User>) => {
+      if (!user) {
+        throw new Error(
+          '로그인된 사용자 정보가 없어 프로필을 수정할 수 없습니다.',
+        );
+      }
+
+      setUser(prev => {
+        if (!prev) {
+          throw new Error(
+            '로그인된 사용자 정보가 없어 프로필을 수정할 수 없습니다.',
+          );
+        }
+
+        return {
+          ...prev,
+          ...newData,
+        };
+      });
+    },
+    [user],
+  );
+
+  const login = (token: string, state: UserState) => {};
 
   const logout = () => {
-    setUserToken(null);
-    setUserState(null);
     pendingTokenRef.current = null;
   };
 
   return (
     <AuthContext.Provider
       value={{
-        userToken,
-        userState,
+        user,
+        setUser,
+        updateUserMetaData,
         login,
         logout,
       }}

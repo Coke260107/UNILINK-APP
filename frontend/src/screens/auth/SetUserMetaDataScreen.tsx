@@ -1,16 +1,12 @@
+// src/screens/auth/SetUserMetaDataScreen.tsx
 import React, { RefObject, useCallback, useRef, useState } from 'react';
-import {
-  Keyboard,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import BottomSheet, { BottomSheetModal } from '@gorhom/bottom-sheet';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 // Api
@@ -26,45 +22,36 @@ import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 import * as UserType from '../../types/userType';
 import { AuthStackParamList } from '../../types/navigationType';
 import AnimatedPressable from '../../components/buttons/AnimatedPressable';
-
-type Props = NativeStackScreenProps<AuthStackParamList, 'SetProfile'>;
 type OpenModalPressableProps = {
   label: string;
   selectedValueLabel: string;
   onPress: () => void;
+  modalRef: RefObject<BottomSheetModal | null>;
 };
 
 // Util
 import PALETTE from '../../utils/color';
 import DefaultHeader from '../../components/headers/DefaultHeader';
 import AnimatedTextInput from '../../components/textInputs/AnimatedTextInput';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
-/* ==================== Inner Component ==================== */
-const OpenModalPressable = (props: OpenModalPressableProps) => {
-  return (
-    <View style={{ flex: 1 }}>
-      <Text>{props.label}</Text>
-      <Pressable
-        style={{
-          height: 52,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 4,
-          borderBottomWidth: 1.5,
-          borderColor: PALETTE.border,
-        }}
-      >
-        <Text style={{ fontSize: 18 }}>{props.selectedValueLabel}</Text>
-        <FontAwesome6 name="chevron-down" iconStyle="solid" size={16} />
-      </Pressable>
-    </View>
-  );
+/* ==================== Handle ==================== */
+const handleSelectValueInModal = <T,>(
+  changedValue: T,
+  setter: (data: T) => void,
+  modlaRef: RefObject<BottomSheetModal | null>,
+) => {
+  setter(changedValue);
+
+  modlaRef?.current?.dismiss();
 };
 
 // ==================== Main ==================== //
-const SetProfileScreen = ({ route, navigation }: Props) => {
-  const { nickname } = route.params;
+const SetUserMetaDataScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+  const { user, updateUserMetaData } = useAuth();
 
   const genderBottomModalRef = useRef<BottomSheetModal>(null);
   const mbtiBottomModalRef = useRef<BottomSheetModal>(null);
@@ -77,12 +64,28 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // Handle
-  const handleOpenModal = useCallback(
-    (ref: RefObject<BottomSheetModal | null>) => {
-      ref.current?.present();
-    },
-    [],
-  );
+  const handlePressNext = () => {
+    if (loading) return;
+
+    setLoading(true);
+
+    const userMetaData: UserType.UserMetaData = {
+      gender: gender,
+      mbti: mbti,
+      age: age,
+      introduction: introduction,
+    };
+
+    try {
+      updateUserMetaData(userMetaData);
+
+      navigation.navigate('SetLocation');
+    } catch (error: any) {
+      Alert.alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -109,7 +112,7 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
                   <FontAwesome6 name="user" iconStyle="solid" size={60} />
                 </View>
 
-                <Text style={styles.nickname}>{nickname}</Text>
+                <Text style={styles.nickname}>{user?.nickname}</Text>
               </View>
 
               {/* Gender & Mbti */}
@@ -118,11 +121,13 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
                   label="성별"
                   onPress={() => null}
                   selectedValueLabel={UserType.GENDER_LABEL[gender]}
+                  modalRef={genderBottomModalRef}
                 />
                 <OpenModalPressable
                   label="MBTI"
                   onPress={() => null}
                   selectedValueLabel={UserType.MBTI_LABEL[mbti]}
+                  modalRef={mbtiBottomModalRef}
                 />
               </View>
 
@@ -132,6 +137,7 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
                   label="연령대"
                   onPress={() => null}
                   selectedValueLabel={UserType.AGE_LABEL[age]}
+                  modalRef={ageBottomModalRef}
                 />
               </View>
 
@@ -149,7 +155,7 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
             </View>
 
             {/* Bottom */}
-            <AnimatedPressable label="다음" onPress={() => null} />
+            <AnimatedPressable label="다음" onPress={() => handlePressNext()} />
           </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>
@@ -162,7 +168,9 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
         title="성별을 선택해 주세요"
         options={UserType.GENDER_OPTION}
         selected={gender}
-        onSelected={() => null}
+        onSelected={value =>
+          handleSelectValueInModal(value, setGender, genderBottomModalRef)
+        }
       />
 
       {/* MBTI */}
@@ -171,7 +179,9 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
         title="MBTI를 선택해 주세요"
         options={UserType.MBTI_OPTION}
         selected={mbti}
-        onSelected={() => null}
+        onSelected={value =>
+          handleSelectValueInModal(value, setMbti, mbtiBottomModalRef)
+        }
         colNum={2}
       />
 
@@ -181,9 +191,43 @@ const SetProfileScreen = ({ route, navigation }: Props) => {
         title="나이대를 선택해 주세요"
         options={UserType.AGE_OPTION}
         selected={age}
-        onSelected={() => null}
+        onSelected={value =>
+          handleSelectValueInModal(value, setAge, ageBottomModalRef)
+        }
       />
     </>
+  );
+};
+
+/* ==================== Component ==================== */
+const OpenModalPressable = (props: OpenModalPressableProps) => {
+  // Handle
+  const handleOpenModal = useCallback(
+    (ref: RefObject<BottomSheetModal | null>) => {
+      ref.current?.present();
+    },
+    [],
+  );
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Text>{props.label}</Text>
+      <Pressable
+        style={{
+          height: 52,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingHorizontal: 4,
+          borderBottomWidth: 1.5,
+          borderColor: PALETTE.border,
+        }}
+        onPress={() => handleOpenModal(props.modalRef)}
+      >
+        <Text style={{ fontSize: 18 }}>{props.selectedValueLabel}</Text>
+        <FontAwesome6 name="chevron-down" iconStyle="solid" size={16} />
+      </Pressable>
+    </View>
   );
 };
 
@@ -270,4 +314,4 @@ const styles = StyleSheet.create({
 });
 
 /* ==================== Export ==================== */
-export default SetProfileScreen;
+export default SetUserMetaDataScreen;

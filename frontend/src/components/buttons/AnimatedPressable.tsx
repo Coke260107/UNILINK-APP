@@ -6,6 +6,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import PALETTE from '../../utils/color';
+import LoaderKitView from 'react-native-loader-kit';
 
 type Props = {
   label: string;
@@ -47,7 +48,16 @@ const AnimatedPressable = ({
       disabled={isDisabled}
       style={[styles.container, animatedContainerStyle, style]}
     >
-      <Animated.Text style={[styles.text]}>{label}</Animated.Text>
+      {loading ? (
+        <LoaderKitView
+          style={{ width: 40, height: 40 }}
+          name={'BallPulse'}
+          animationSpeedMultiplier={0.75}
+          color={'white'}
+        />
+      ) : (
+        <Animated.Text style={[styles.text]}>{label}</Animated.Text>
+      )}
     </AniPressable>
   );
 };

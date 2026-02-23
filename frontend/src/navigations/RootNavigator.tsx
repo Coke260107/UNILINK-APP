@@ -2,7 +2,6 @@
 
 import { useAuth } from '../contexts/AuthContext';
 import AuthNavigator from './AuthNavigator';
-import RegistrationNavigator from './RegistrationNavigator';
 import { Text } from 'react-native';
 
 // ==================== Main ==================== //

@@ -36,7 +36,6 @@ const ScrollableBottomSheetModalInner = <T extends string>(
 ) => {
   const { title, options, selected, onSelected, onClose, colNum = 1 } = props;
 
-  // 1. Backdrop
   const renderBackdrop = useCallback(
     (backdropProps: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
@@ -48,13 +47,11 @@ const ScrollableBottomSheetModalInner = <T extends string>(
     [],
   );
 
-  // 2. Header (title이 전달되었을 때만 렌더링)
   const ListHeaderComponent = useCallback(() => {
     if (!title) return null;
     return <Text style={styles.title}>{title}</Text>;
   }, [title]);
 
-  // 3. Render Item (onSelected가 옵셔널이므로 안전하게 호출)
   const renderItem: ListRenderItem<OptionType<T>> = useCallback(
     ({ item }) => {
       const isSelected = item.value === selected;
@@ -86,7 +83,7 @@ const ScrollableBottomSheetModalInner = <T extends string>(
       enablePanDownToClose={true}
       topInset={200}
       handleComponent={null}
-      onDismiss={onClose} // 모달이 닫힐 때 onClose 실행
+      onDismiss={onClose}
     >
       <BottomSheetFlatList
         data={options}
@@ -96,7 +93,6 @@ const ScrollableBottomSheetModalInner = <T extends string>(
         contentContainerStyle={styles.content_container}
         renderItem={renderItem}
         numColumns={colNum}
-        // numColumns가 1일 때 columnWrapperStyle이 들어가면 에러가 나므로 undefined 처리
         columnWrapperStyle={colNum > 1 ? styles.column_wrapper : undefined}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}

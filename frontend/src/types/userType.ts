@@ -1,5 +1,21 @@
 // src/types/userType.ts
 
+/* ==================== User Data For Auth Context ==================== */
+export type User = UserMetaData & {
+  userId: number;
+  userState: UserState;
+  jwtToken: string;
+};
+
+/* ==================== UserMetaData ==================== */
+export type UserMetaData = {
+  nickname?: string;
+  gender?: GenderType;
+  mbti?: MbtiType;
+  age?: AgeType;
+  introduction?: string;
+};
+
 /* ==================== UserState ==================== */
 export type UserState = 'GUEST' | 'USER' | 'ADMIN';
 
@@ -12,7 +28,7 @@ export const GENDER_LABEL: Record<GenderType, string> = {
   MALE: '남성',
   FEMALE: '여성',
   OTHER: '기타',
-  PRIVATE: '선택 안 함',
+  PRIVATE: '공개 안 함',
 };
 
 type GenderItemType = {
@@ -65,7 +81,7 @@ export const MBTI_LABEL: Record<MbtiType, string> = {
   ISFP: 'ISFP',
   ESTP: 'ESTP',
   ESFP: 'ESFP',
-  PRIVATE: '선택 안 함',
+  PRIVATE: '공개 안 함',
 };
 
 type MbtiItemType = {
@@ -79,15 +95,26 @@ export const MBTI_OPTION: readonly MbtiItemType[] = MBTI.map(mbti => ({
 }));
 
 // ==================== Age ==================== //
-const AGE = ['TEEN', 'TWENTIES', 'THIRTIES', 'PRIVATE'] as const;
+const AGE = [
+  'AGE_10',
+  'AGE_20',
+  'AGE_30',
+  'AGE_40',
+  'AGE_50',
+  'AGE_60',
+  'PRIVATE',
+] as const;
 
 export type AgeType = (typeof AGE)[number];
 
 export const AGE_LABEL: Record<AgeType, string> = {
-  TEEN: '10대',
-  TWENTIES: '20대',
-  THIRTIES: '30대 이상',
-  PRIVATE: '선택 안 함',
+  AGE_10: '10대',
+  AGE_20: '20대',
+  AGE_30: '30대',
+  AGE_40: '40대',
+  AGE_50: '50대',
+  AGE_60: '60대 이상',
+  PRIVATE: '공개 안 함',
 };
 
 type AgeItemType = {

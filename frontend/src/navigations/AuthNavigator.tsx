@@ -8,7 +8,8 @@ import SetNicknameScreen from '../screens/auth/SetNicknameScreen';
 
 // Type
 import { AuthStackParamList } from '../types/navigationType';
-import SetProfileScreen from '../screens/auth/SetProfileScreen';
+import SetUserMetaDataScreen from '../screens/auth/SetUserMetaDataScreen';
+import SetLocationScreen from '../screens/auth/SetLocationScreen';
 
 /* ==================== Main ==================== */
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -21,7 +22,8 @@ const AuthNavigator = () => {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="SetNickname" component={SetNicknameScreen} />
-      <Stack.Screen name="SetProfile" component={SetProfileScreen} />
+      <Stack.Screen name="SetUserMetaData" component={SetUserMetaDataScreen} />
+      <Stack.Screen name="SetLocation" component={SetLocationScreen} />
     </Stack.Navigator>
   );
 };

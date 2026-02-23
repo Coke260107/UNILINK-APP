@@ -21,33 +21,38 @@ import globalStyles from '../../utils/globalStyle';
 
 // Context
 import { useAuth } from '../../contexts/AuthContext';
+import { User } from '../../types/userType';
 
 // ==================== Main ==================== //
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
 const LoginScreen = ({ navigation, route }: Props) => {
+  const { setUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
   const { login: authLogin } = useAuth();
 
   // Handle
   const handleLoginWithKakao = async () => {
-    try {
-      if (loading) return;
-      setLoading(true);
+    if (loading) return;
+    setLoading(true);
 
+    try {
       const { accessToken } = await kakaoLogin();
 
       const data = await login(accessToken);
 
-      console.log(data.state);
+      const user: User = {
+        userId: data.userId,
+        userState: data.state,
+        jwtToken: data.jwtToken,
+      };
 
-      if (data.state === 'GUEST') {
-        console.log('여기 실행됨');
+      setUser(user);
+
+      if (user && user.userState === 'GUEST')
         navigation.navigate('SetNickname');
-      }
     } catch (error: any) {
-      Alert.alert('오류가 발생했습니다. 잠시후에 다시 시도해 주세요');
-      console.log(error.message);
+      Alert.alert(error.message);
     } finally {
       setLoading(false);
     }

@@ -1,3 +1,5 @@
+import { UserMetaData } from './userType';
+
 export type RootStackParamList = {
   Login: undefined;
 };
@@ -5,10 +7,6 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Login: undefined;
   SetNickname: undefined;
-  SetProfile: { nickname: string };
-};
-
-export type RegistrationStackParamList = {
-  SetNickname: undefined;
-  SetProfile: { nickname: string };
+  SetUserMetaData: undefined;
+  SetLocation: undefined;
 };
