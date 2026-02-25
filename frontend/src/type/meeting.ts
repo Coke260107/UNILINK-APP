@@ -8,6 +8,7 @@ export type Meeting = {
   id: number;
   category: Category;
   title: string;
+  info: string;
   host: User;
   like: number;
   maxMember: number;

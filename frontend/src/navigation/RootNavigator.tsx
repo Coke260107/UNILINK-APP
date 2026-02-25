@@ -6,6 +6,8 @@ import MainTabNavigator from './MainTabNavigator';
 import { RootStackParamList } from './type';
 import AuthNavigator from './AuthNavigator';
 import HomeScreen from '../screen/home/HomeScreen';
+import SearchNavigator from './SearchNavigator';
+
 // ============================================================
 
 // Main
@@ -19,9 +21,10 @@ export default function RootNavigator() {
         initialRouteName="MainTab"
         screenOptions={{ headerShown: false }}
       >
-         <Stack.Screen name="MainTab" component={MainTabNavigator} />
+        <Stack.Screen name="MainTab" component={MainTabNavigator} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
+        <Stack.Screen name="SearchNavigator" component={SearchNavigator} options={{ headerShown: false }} />
       </Stack.Navigator>
     </>
   );

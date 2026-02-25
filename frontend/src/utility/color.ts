@@ -1,10 +1,14 @@
 const Colors = {
   background: 'rgb(250, 250, 250)', // Neutral-50
+  backgroundpress: 'rgb(245,245,245)', //Neutral-100
   border: 'rgb(229, 229, 229)', // Neutral-300
+  borderpress: 'rgb(207, 207, 207)',
   guide: 'rgb(161, 161, 161)', // Neutral-400
+  
   red: 'rgb(255, 100, 103)', // Red-400
   gray: 'rgb(245,245,245)',
   graypress: 'rgb(105, 105, 150)',
+  
   
   study: {
     main: '#B7C9E2',
@@ -39,6 +43,7 @@ export type CategoryColorType = {
   main: string;
   sub: string;
   point: string;
+  pressed: string;
 };
 
 export default Colors;

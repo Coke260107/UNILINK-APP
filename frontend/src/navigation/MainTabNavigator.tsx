@@ -9,6 +9,7 @@ import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 // Screen
 import HomeScreen from '../screen/home/HomeScreen';
 import ChattingListScreen from '../screen/chat/ChatList';
+import SearchBeforeScreen  from '../screen/search/search';
 
 // Type
 import type { MainTabParamList } from './type';
@@ -18,8 +19,13 @@ import Colors from '../utility/color';
 import {
   HomeScreenHeader,
   ChattingListHeader,
-  ChattingListRightHeader,
-} from '../header/header'
+  SearchScreenHeader,
+  SingleBackHeader,
+  SearchHeader,
+} from '../header/header';
+import { useNavigation } from '@react-navigation/native';
+import { ScreenStack } from 'react-native-screens';
+
 //===========================================================================
 
 //Main
@@ -53,18 +59,13 @@ function MainTabNavigator() {
         component={HomeScreen}
         options={{
           headerTitle: () => <HomeScreenHeader />,
-          headerRight: () => <ChattingListRightHeader />,
+          headerRight: () => <SearchHeader />, 
+
           headerRightContainerStyle: { paddingRight: 12 },
           headerTitleAlign: 'left',
-
           tabBarLabel: '홈',
           tabBarIcon: ({ color }) => (
-            <FontAwesome6
-              name="house"
-              iconStyle="solid"
-              size={16}
-              color={color}
-            />
+            <FontAwesome6 name="house" iconStyle="solid" size={16} color={color} />
           ),
         }}
       />
@@ -73,24 +74,19 @@ function MainTabNavigator() {
         name="ChattingList"
         component={ChattingListScreen}
         options={{
-          // Header Style
           headerTitle: () => <ChattingListHeader />,
-          headerRight: () => <ChattingListRightHeader />,
-          headerRightContainerStyle: { paddingRight: 12 },
+          headerRight: () => <SearchHeader />,
 
-          // TabBar Style
+          headerRightContainerStyle: { paddingRight: 12 },
           tabBarLabel: '채팅',
           tabBarIcon: ({ color }) => (
-            <FontAwesome6
-              name="comments"
-              iconStyle="solid"
-              size={16}
-              color={color}
-            />
+            <FontAwesome6 name="comments" iconStyle="solid" size={16} color={color} />
           ),
         }}
       />
+      
     </Tab.Navigator>
+
   );
 }
 
