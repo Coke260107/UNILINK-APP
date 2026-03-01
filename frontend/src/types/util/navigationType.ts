@@ -1,5 +1,3 @@
-import { UserMetaData } from './userType';
-
 export type RootStackParamList = {
   Login: undefined;
 };

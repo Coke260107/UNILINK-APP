@@ -14,6 +14,7 @@ export type UserMetaData = {
   mbti?: MbtiType;
   age?: AgeType;
   introduction?: string;
+  location?: string;
 };
 
 /* ==================== UserState ==================== */
@@ -43,20 +44,22 @@ export const GENDER_OPTION: readonly GenderItemType[] = GENDER.map(gender => ({
 
 // ==================== MBTI ==================== //
 const MBTI = [
+  // I 타입
   'INTJ',
   'INTP',
-  'ENTJ',
-  'ENTP',
   'INFJ',
   'INFP',
-  'ENFJ',
-  'ENFP',
   'ISTJ',
   'ISFJ',
-  'ESTJ',
-  'ESFJ',
   'ISTP',
   'ISFP',
+  // E 타입
+  'ENTJ',
+  'ENTP',
+  'ENFJ',
+  'ENFP',
+  'ESTJ',
+  'ESFJ',
   'ESTP',
   'ESFP',
   'PRIVATE',

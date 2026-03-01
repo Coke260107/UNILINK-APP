@@ -14,14 +14,15 @@ import LoadingModal from '../../components/modals/LoadingModal';
 import KakaoLoginButton from '../../components/buttons/KakaoLoginButton';
 
 // Type
-import { AuthStackParamList } from '../../types/navigationType';
+import { AuthStackParamList } from '../../types/util/navigationType';
 
 // Style
 import globalStyles from '../../utils/globalStyle';
 
 // Context
 import { useAuth } from '../../contexts/AuthContext';
-import { User } from '../../types/userType';
+import { User } from '../../types/user/userType';
+import { getJwtToken, saveJwtToken } from '../../utils/keychain';
 
 // ==================== Main ==================== //
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
@@ -37,10 +38,11 @@ const LoginScreen = ({ navigation, route }: Props) => {
     setLoading(true);
 
     try {
+      // 카카오 로그인
       const { accessToken } = await kakaoLogin();
 
+      // 앱 로그인 및 유저 객체 생성
       const data = await login(accessToken);
-
       const user: User = {
         userId: data.userId,
         userState: data.state,
@@ -50,7 +52,8 @@ const LoginScreen = ({ navigation, route }: Props) => {
       setUser(user);
 
       if (user && user.userState === 'GUEST')
-        navigation.navigate('SetNickname');
+        await saveJwtToken({ userId: data.userId, token: data.jwtToken });
+      navigation.navigate('SetNickname');
     } catch (error: any) {
       Alert.alert(error.message);
     } finally {

@@ -1,6 +1,6 @@
 // src/type/authType.ts
 
-import { UserState } from '../userType';
+import { User, UserMetaData, UserState } from '../user/userType';
 
 // ==================== Main ==================== //
 export type LoginRequestType = string;
@@ -11,3 +11,7 @@ export type LoginResponseType = {
   state: UserState;
   jwtToken: string;
 };
+
+export type RegisterRequestType = UserMetaData;
+
+export type RegisterResponseType = User;

@@ -24,6 +24,12 @@ allprojects {
             url "https://devrepo.kakao.com/nexus/content/groups/public/"
         }
     }
+
+    repositories {
+        maven {
+            url "https://repository.map.naver.com/archive/maven"
+        }
+    }
 }
 
 apply plugin: "com.facebook.react.rootproject"

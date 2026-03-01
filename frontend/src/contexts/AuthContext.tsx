@@ -5,10 +5,12 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react';
-import { User, UserMetaData, UserState } from '../types/userType';
+import { User, UserMetaData, UserState } from '../types/user/userType';
+import { saveJwtToken, getJwtToken } from '../utils/keychain';
 
 // Type
 type AuthContextType = {
@@ -30,6 +32,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const pendingTokenRef = useRef<string | null>(null);
+
+  // Handle
+  const handleInitialize = useCallback(async () => {
+    try {
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  }, []);
 
   const updateUserMetaData = useCallback(
     (newData: Partial<User>) => {
@@ -60,6 +70,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = () => {
     pendingTokenRef.current = null;
   };
+
+  // useEffect
+  useEffect(() => {}, []);
 
   return (
     <AuthContext.Provider

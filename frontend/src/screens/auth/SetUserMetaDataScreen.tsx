@@ -19,8 +19,8 @@ import globalStyles from '../../utils/globalStyle';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 
 // Type
-import * as UserType from '../../types/userType';
-import { AuthStackParamList } from '../../types/navigationType';
+import * as UserType from '../../types/user/userType';
+import { AuthStackParamList } from '../../types/util/navigationType';
 import AnimatedPressable from '../../components/buttons/AnimatedPressable';
 type OpenModalPressableProps = {
   label: string;

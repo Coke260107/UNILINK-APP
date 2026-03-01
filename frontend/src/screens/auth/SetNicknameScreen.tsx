@@ -20,8 +20,8 @@ import AnimatedPressable from '../../components/buttons/AnimatedPressable';
 import AnimatedTextInput from '../../components/textInputs/AnimatedTextInput';
 
 // Type
-import { AuthStackParamList } from '../../types/navigationType';
-import { User, UserMetaData } from '../../types/userType';
+import { AuthStackParamList } from '../../types/util/navigationType';
+import { User, UserMetaData } from '../../types/user/userType';
 
 // Style
 import globalStyles from '../../utils/globalStyle';

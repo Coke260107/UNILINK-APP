@@ -7,8 +7,6 @@ import { Text } from 'react-native';
 // ==================== Main ==================== //
 
 const RootNavigator = () => {
-  const { userToken, userState } = useAuth();
-
   // 미로그인: 로그인 화면
   return <AuthNavigator />;
 };
