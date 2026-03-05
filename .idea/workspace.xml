@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="908b6267-cd87-4e51-9ea8-1ef004ccd29b" name="변경" comment="변경">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/unilink/backend/controller/MeetingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/unilink/backend/domain/meeting/Meeting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/unilink/backend/repository/MeetingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/unilink/backend/service/MeetingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/UNILINK.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UNILINK.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/unilink/backend/BackendApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/backend/api-v1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/backend/schema-v1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.bundle/config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.prettierrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.watchmanconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Gemfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/__tests__/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/debug.keystore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/java/com/frontend/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/java/com/frontend/MainApplication.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/drawable/rn_edit_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/android/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/globalStyle.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/.xcode.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend.xcodeproj/xcshareddata/xcschemes/frontend.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend/Images.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend/LaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/ios/frontend/PrivacyInfo.xcprivacy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/jest.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/metro.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/component/button/AuthButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/navigation/AuthNavigator.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/navigation/RootNavigator.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/navigation/type.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/screen/auth/AuthScreen.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/../study/hello-spring">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hello-spring" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="3AWnL2JnACR6yetZteacemLmrgb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "meeting",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/USER/Desktop/unilink",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="908b6267-cd87-4e51-9ea8-1ef004ccd29b" name="변경" comment="" />
+      <created>1772717135949</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772717135949</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
