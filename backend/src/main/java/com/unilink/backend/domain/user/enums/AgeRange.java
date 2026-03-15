@@ -9,3 +9,4 @@ public enum AgeRange {
     AGE_60,
     PRIVATE,
 }
+ 

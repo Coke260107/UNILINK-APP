@@ -79,10 +79,14 @@ public class JwtTokenProvider {
 
         Collection<? extends GrantedAuthority> authorities =
                 Arrays.asList((new SimpleGrantedAuthority(role)));
-
+        /*
         UserDetails principal = new User(userId, "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+         */
+
+        Long userIdLong = Long.parseLong(userId);
+        return new UsernamePasswordAuthenticationToken(userIdLong, "", authorities);
     }
 
     private Claims getClaims(String token) {
