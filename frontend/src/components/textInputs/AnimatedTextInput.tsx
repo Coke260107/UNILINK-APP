@@ -15,8 +15,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import PALETTE from '../../utils/color';
 
-// 1. TextInputProps를 상속받아 모든 기본 속성(multiline, maxLength 등)을 허용합니다.
-// 2. style은 배열 형태의 스타일도 받을 수 있도록 StyleProp<TextStyle>로 넓혀줍니다.
 interface Props extends TextInputProps {
   style?: StyleProp<TextStyle>;
 }
@@ -28,8 +26,8 @@ const AnimatedTextInput = ({
   style,
   onFocus,
   onBlur,
-  multiline, // 긴 글 작성 여부를 확인하기 위해 빼냅니다
-  ...rest // 나머지 모든 TextInput 속성들을 ...rest로 한 번에 받습니다
+  multiline,
+  ...rest
 }: Props) => {
   const isFocused = useSharedValue(false);
   const timingConfig = { duration: 150 };
@@ -43,22 +41,22 @@ const AnimatedTextInput = ({
 
   return (
     <AniTextInput
-      {...rest} // value, onChangeText, placeholder 등 부모가 넘긴 모든 속성을 그대로 주입합니다
+      {...rest}
       multiline={multiline}
       placeholderTextColor={PALETTE.border}
       onFocus={e => {
         isFocused.value = true;
-        onFocus?.(e); // 부모에서 onFocus를 따로 넘겼다면 실행해 줍니다
+        onFocus?.(e);
       }}
       onBlur={e => {
         isFocused.value = false;
-        onBlur?.(e); // 부모에서 onBlur를 따로 넘겼다면 실행해 줍니다
+        onBlur?.(e);
       }}
       style={[
         styles.container,
-        multiline && styles.multiline, // multiline이 true일 때만 적용되는 스타일
+        multiline && styles.multiline,
         animatedStyle,
-        style, // 부모에서 넘긴 커스텀 스타일이 가장 마지막에 덮어씌워집니다
+        style,
       ]}
     />
   );

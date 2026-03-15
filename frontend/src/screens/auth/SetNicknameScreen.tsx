@@ -15,7 +15,7 @@ import { CheckNicknameDuplication } from '../../api/user/userApi';
 // Context
 
 // Component
-import DefaultHeader from '../../components/headers/DefaultHeader';
+import BackButtonHeader from '../../components/headers/BackButtonHeader';
 import AnimatedPressable from '../../components/buttons/AnimatedPressable';
 import AnimatedTextInput from '../../components/textInputs/AnimatedTextInput';
 
@@ -76,7 +76,7 @@ const SetNicknameScreen = () => {
 
   return (
     <SafeAreaView style={globalStyles.safeAreaView}>
-      <DefaultHeader />
+      <BackButtonHeader />
       <KeyboardAvoidingView
         behavior="padding"
         style={[styles.container]}

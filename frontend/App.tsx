@@ -37,11 +37,12 @@ const App = () => {
 
   return (
     <AppProvider>
-      <StatusBar
+      {/* <StatusBar
         translucent
         backgroundColor="transparent"
         barStyle="dark-content"
-      />
+      /> */}
+      <StatusBar barStyle={'dark-content'} translucent={true} />
       <NavigationContainer>
         <RootNavigator />
       </NavigationContainer>

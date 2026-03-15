@@ -1,4 +1,4 @@
-// src/components/headers/DefaultHeader.tsx
+// src/components/headers/BackButtonHeader.tsx
 
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -10,7 +10,7 @@ import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 import PALETTE from '../../utils/color';
 
 /* ==================== Main ==================== */
-const DefaultHeader = () => {
+const BackButtonHeader = () => {
   const navigation = useNavigation();
   const checkNicknameDuplication = () => {};
 
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
 });
 
 /* ==================== Export ==================== */
-export default DefaultHeader;
+export default BackButtonHeader;

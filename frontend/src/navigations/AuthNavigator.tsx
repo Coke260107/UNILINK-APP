@@ -7,7 +7,7 @@ import LoginScreen from '../screens/auth/LoginScreen';
 import SetNicknameScreen from '../screens/auth/SetNicknameScreen';
 
 // Type
-import { AuthStackParamList } from '../types/navigationType';
+import { AuthStackParamList } from '../types/util/navigationType';
 import SetUserMetaDataScreen from '../screens/auth/SetUserMetaDataScreen';
 import SetLocationScreen from '../screens/auth/SetLocationScreen';
 

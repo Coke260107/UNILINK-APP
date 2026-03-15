@@ -13,6 +13,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 // Component
 import SelectBottomSheetModal from '../../components/modals/SelectBottomSheetModal';
+import BackButtonHeader from '../../components/headers/BackButtonHeader';
 
 // Style
 import globalStyles from '../../utils/globalStyle';
@@ -31,7 +32,6 @@ type OpenModalPressableProps = {
 
 // Util
 import PALETTE from '../../utils/color';
-import DefaultHeader from '../../components/headers/DefaultHeader';
 import AnimatedTextInput from '../../components/textInputs/AnimatedTextInput';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
@@ -90,7 +90,7 @@ const SetUserMetaDataScreen = () => {
   return (
     <>
       <SafeAreaView style={globalStyles.safeAreaView}>
-        <DefaultHeader />
+        <BackButtonHeader />
 
         {/* Main */}
         <KeyboardAwareScrollView

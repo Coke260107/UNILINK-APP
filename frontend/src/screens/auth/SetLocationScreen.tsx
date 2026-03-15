@@ -1,7 +1,14 @@
 // src/screens/auth/SetLocationScreen.tsx
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Platform, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  BackHandler,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import Geolocation from '@react-native-community/geolocation';
@@ -15,7 +22,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 // Components
 import AnimatedPressable from '../../components/buttons/AnimatedPressable';
-import DefaultHeader from '../../components/headers/DefaultHeader';
+import BackButtonHeader from '../../components/headers/BackButtonHeader';
 import NaverMap from '../../components/map/NaverMap';
 
 // Style
@@ -125,7 +132,7 @@ const SetLocationScreen = () => {
 
   return (
     <SafeAreaView style={[globalStyles.safeAreaView]}>
-      <DefaultHeader />
+      <BackButtonHeader />
       <View>
         <Text style={styles.title}>대략적인 위치를 알려주세요</Text>
       </View>
