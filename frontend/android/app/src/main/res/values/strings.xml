@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">frontend</string>
+    <string name="kakao_app_key">f8bea2024f9b5ba980561d8a549505e0</string>
 </resources>

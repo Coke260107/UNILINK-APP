@@ -1,6 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
 
     <application
       android:name=".MainApplication"
@@ -9,7 +15,7 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
-      android:usesCleartextTraffic="${usesCleartextTraffic}"
+      android:usesCleartextTraffic="true"
       android:supportsRtl="true">
       <activity
         android:name=".MainActivity"
@@ -24,19 +30,27 @@
         </intent-filter>
       </activity>
 
-      <!-- for kakao auth -->
       <activity
-        android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-            <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-            <data android:host="oauth"
-                    android:scheme="kakaof8bea2024f9b5ba980561d8a549505e0" />
-        </intent-filter>
-      </activity>
+                <data android:host="oauth" android:scheme="kakaof8bea2024f9b5ba980561d8a549505e0" />
+            </intent-filter>
+        </activity>
+
+
+        <meta-data
+            android:name="com.naver.maps.map.NCP_KEY_ID"
+            android:value="eqm8wqg2ft" />
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="eqm8wqg2ft" />
     </application>
+
 </manifest>
+
