@@ -48,6 +48,7 @@ UNILINK는 공통 관심사를 가진 사람들과 모임을 만들고 참여할
 
 ## 📁 프로젝트 구조
 
+``` PlainText
 UNILINK-APP/
 ├── frontend/          # React Native 앱
 │   └── src/
@@ -63,6 +64,7 @@ UNILINK-APP/
 │       ├── chat/
 │       └── auth/
 └── docs/              # 설계 문서
+```
 
 
 
@@ -95,7 +97,7 @@ UNILINK-APP/
     - ✅ - 화면 디자인
     - ❌ - 모임 상세보기 기능
     - 🚧 - 모임 생성 기능
-
+    - ❌ - 모임 검색 기능
 
 
 ---
