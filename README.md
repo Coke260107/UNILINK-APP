@@ -59,10 +59,8 @@ UNILINK-APP/
 ├── backend/           # Spring Boot 서버
 │   └── src/main/java/
 │       ├── user/
-│       ├── meeting/
-│       ├── board/
-│       ├── chat/
-│       └── auth/
+│       ├── location/
+│       └── board/
 └── docs/              # 설계 문서
 ```
 
