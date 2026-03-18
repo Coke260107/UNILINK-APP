@@ -3,6 +3,4 @@ export type SaveJwtTokenRequestType = {
   token: string;
 };
 
-export type GetJwtTokenResponse = {
-  token: string;
-};
+export type GetJwtTokenResponse = string | null;

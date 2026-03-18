@@ -12,13 +12,18 @@ import {
 import { User, UserMetaData, UserState } from '../types/user/userType';
 import { saveJwtToken, getJwtToken } from '../utils/keychain';
 
+// Api
+import { login as appLogin } from '../api/auth/authApi';
+
+// Debug
+import * as keychain from 'react-native-keychain';
+
 // Type
 type AuthContextType = {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   updateUserMetaData: (newDate: Partial<UserMetaData>) => void;
-  login: (token: string, state: UserState) => void;
-  logout: () => void;
+  login: (token: string) => Promise<User>;
 };
 
 type AuthProviderProps = {
@@ -31,15 +36,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
-  const pendingTokenRef = useRef<string | null>(null);
-
-  // Handle
-  const handleInitialize = useCallback(async () => {
-    try {
-    } catch (error: any) {
-      console.error(error.message);
-    }
-  }, []);
 
   const updateUserMetaData = useCallback(
     (newData: Partial<User>) => {
@@ -65,14 +61,57 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     [user],
   );
 
-  const login = (token: string, state: UserState) => {};
+  const login = async (kakaoAccessToken: string): Promise<User> => {
+    try {
+      const data = await appLogin(kakaoAccessToken);
 
-  const logout = () => {
-    pendingTokenRef.current = null;
+      const user: User = {
+        userId: data.userId,
+        userState: data.state,
+        jwtToken: data.jwtToken,
+      };
+
+      await saveJwtToken({ userId: user.userId, token: user.jwtToken });
+      return user;
+    } catch (error: any) {
+      throw error;
+    }
+  };
+
+  // Debug Handle
+  const handleResetJWTToken = async () => {
+    try {
+      await keychain.resetGenericPassword({ service: 'unilink_jwtToken' });
+      if (__DEV__) {
+        console.log('[keychain] Complete Reset JWT token in storage');
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   // useEffect
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        const savedJwtToken = await getJwtToken();
+
+        if (!savedJwtToken) {
+          setUser(null);
+          console.log(`[AuthContext] jwt Token not found`);
+          return;
+        }
+
+        // Login
+        // appLogin(savedJwtToken);
+      } catch (error: any) {
+        if (__DEV__)
+          console.error(`[AuthContext] initialize failed\n ${error.message}`);
+      }
+    };
+
+    initialize();
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -81,7 +120,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser,
         updateUserMetaData,
         login,
-        logout,
       }}
     >
       {children}

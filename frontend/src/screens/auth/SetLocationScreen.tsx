@@ -54,7 +54,7 @@ const handleEnsureLocationPermission = async (): Promise<boolean> => {
 /* ==================== Main ==================== */
 const SetLocationScreen = () => {
   // context
-  const { user, updateUserMetaData } = useAuth();
+  const { user, setUser, updateUserMetaData } = useAuth();
 
   // useState
   const [coords, setCoords] = useState<Coords | null>(null);
@@ -108,7 +108,7 @@ const SetLocationScreen = () => {
       const updatedUserData = { ...user, location: address };
       updateUserMetaData(updatedUserData);
       const data = await Register(updatedUserData);
-      console.log(data);
+      setUser(data);
     } catch (error: any) {
       Alert.alert(error.message);
     } finally {
@@ -119,13 +119,20 @@ const SetLocationScreen = () => {
   // useEffect
   useEffect(() => {
     handleEnsureLocationPermission().then(granted => {
-      if (granted) {
+      if (granted && !__DEV__) {
         Geolocation.getCurrentPosition(pos => {
           setCoords({
             latitude: pos.coords.latitude,
             longitude: pos.coords.longitude,
           });
         });
+      } else {
+        if (__DEV__) {
+          setCoords({
+            latitude: 36.629,
+            longitude: 127.457,
+          });
+        }
       }
     });
   }, []);
