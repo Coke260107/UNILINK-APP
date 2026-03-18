@@ -3,27 +3,44 @@
 // Type
 import Api, { ApiWithJwt } from '../../utils/axios';
 import * as AuthApiType from '../../types/api/authApiType';
+import axios from 'axios';
 
 /* ==================== Main ==================== */
 export const login = async (
   kakaoAccessToken: AuthApiType.LoginRequestType,
 ): Promise<AuthApiType.LoginResponseType> => {
   try {
-    if (!kakaoAccessToken) {
-      console.error('[login] kakaoAccessToken is null');
-      throw new Error();
-    }
-
-    const response = await Api.post('/api/user/login', {
+    const response = await Api.post(`/api/user/login`, {
       accessToken: kakaoAccessToken,
     });
+
     const data: AuthApiType.LoginResponseType = response.data;
     return data;
   } catch (error: any) {
-    console.error('[login] ', error);
-    throw new Error();
+    if (__DEV__) console.error(error.message);
+    throw new Error('로그인 에러');
   }
 };
+
+// export const login = async (
+//   kakaoAccessToken: AuthApiType.LoginRequestType,
+// ): Promise<AuthApiType.LoginResponseType> => {
+//   try {
+//     if (!kakaoAccessToken) {
+//       console.error('[login] kakaoAccessToken is null');
+//       throw new Error();
+//     }
+
+//     const response = await Api.post('/api/user/login', {
+//       accessToken: kakaoAccessToken,
+//     });
+//     const data: AuthApiType.LoginResponseType = response.data;
+//     return data;
+//   } catch (error: any) {
+//     console.error('[login] ', error);
+//     throw new Error();
+//   }
+// };
 
 export const Register = async (
   requestData: AuthApiType.RegisterRequestType,

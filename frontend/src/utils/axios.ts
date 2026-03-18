@@ -15,6 +15,7 @@ const Api: AxiosInstance = axios.create({
 });
 
 export const ApiWithJwt: AxiosInstance = axios.create({
+  // baseURL: 'http://10.0.2.2:8080',
   baseURL: 'http://localhost:8080',
   timeout: 5000,
   headers: {
@@ -24,7 +25,7 @@ export const ApiWithJwt: AxiosInstance = axios.create({
 
 ApiWithJwt.interceptors.request.use(
   async config => {
-    const token = (await getJwtToken()).token;
+    const token = await getJwtToken();
     console.log(token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

@@ -3,6 +3,7 @@
 import { User, UserMetaData, UserState } from '../user/userType';
 
 // ==================== Main ==================== //
+
 export type LoginRequestType = string;
 
 export type LoginResponseType = {

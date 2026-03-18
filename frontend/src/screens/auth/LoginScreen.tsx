@@ -1,13 +1,12 @@
 // src/screens/auth/LoginScreen.tsx
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { login as kakaoLogin } from '@react-native-kakao/user';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 // Api
-import { login } from '../../api/auth/authApi';
 
 // Component
 import LoadingModal from '../../components/modals/LoadingModal';
@@ -28,9 +27,10 @@ import { getJwtToken, saveJwtToken } from '../../utils/keychain';
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
 const LoginScreen = ({ navigation, route }: Props) => {
-  const { setUser } = useAuth();
+  const { user, login, setUser } = useAuth();
+
+  // useState
   const [loading, setLoading] = useState<boolean>(false);
-  const { login: authLogin } = useAuth();
 
   // Handle
   const handleLoginWithKakao = async () => {
@@ -38,28 +38,26 @@ const LoginScreen = ({ navigation, route }: Props) => {
     setLoading(true);
 
     try {
-      // 카카오 로그인
       const { accessToken } = await kakaoLogin();
-
-      // 앱 로그인 및 유저 객체 생성
-      const data = await login(accessToken);
-      const user: User = {
-        userId: data.userId,
-        userState: data.state,
-        jwtToken: data.jwtToken,
-      };
-
+      const user = await login(accessToken);
       setUser(user);
 
-      if (user && user.userState === 'GUEST')
-        await saveJwtToken({ userId: data.userId, token: data.jwtToken });
-      navigation.navigate('SetNickname');
+      if (user.userState === 'GUEST') {
+        navigation.navigate('SetNickname');
+      }
     } catch (error: any) {
-      Alert.alert(error.message);
+      Alert.alert('로그인 오류', '로그인 실패');
     } finally {
       setLoading(false);
     }
   };
+
+  // useEffect
+  useEffect(() => {
+    if (!user) return;
+
+    navigation.navigate('SetNickname');
+  }, []);
 
   return (
     <>
